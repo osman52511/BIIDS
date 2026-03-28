@@ -37,13 +37,17 @@ app.secret_key = os.environ.get('SECRET_KEY', secrets.token_hex(32))
 
 # Database - use Supabase PostgreSQL in production, SQLite locally
 _db_url = os.environ.get('DATABASE_URL', f'sqlite:///{os.path.join(BASE_DIR, "biids.db")}')
-# Railway/Supabase provide postgres:// but SQLAlchemy needs postgresql://
+# Fix URL scheme for SQLAlchemy
 if _db_url.startswith('postgres://'):
     _db_url = _db_url.replace('postgres://', 'postgresql+psycopg2://', 1)
 elif _db_url.startswith('postgresql://') and '+psycopg2' not in _db_url:
     _db_url = _db_url.replace('postgresql://', 'postgresql+psycopg2://', 1)
+# Add SSL for Supabase
+if 'supabase' in _db_url and 'sslmode' not in _db_url:
+    _db_url += '?sslmode=require'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = _db_url
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {'pool_pre_ping': True, 'pool_recycle': 300}
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = os.path.join(BASE_DIR, 'static', 'uploads')
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
