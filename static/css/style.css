@@ -299,7 +299,7 @@ body.lang-en { font-family: var(--font-en); }
 .threat-bg-high { background: #fef2f2; border-left-color: var(--danger); }
 .threat-bg-medium { background: #fffbeb; border-left-color: var(--warning); }
 .threat-bg-low { background: #f0fdf4; border-left-color: var(--success); }
-.threat-bg-unknown, .threat-bg-none { background: var(--bg-surface); border-left-color: #94a3b8; }
+.threat-bg-unknown, .threat-bg-none, .threat-bg-safe { background: #f0fdf4; border-left-color: #16a34a; }
 .threat-banner h5 { color: var(--text); font-size: 1rem; }
 
 /* ── Scanner ── */
@@ -689,14 +689,164 @@ video { width: 100%; display: block; }
 }
 .category-filter .btn { font-size: 0.8rem; padding: 5px 10px; }
 
-/* ── Mobile Responsive ── */
-@media (max-width: 576px) {
-    .auth-card { padding: 22px 18px; }
-    .chapter-list { margin-bottom: 0; }
-}
+/* ══════════════════════════════════════════
+   MOBILE RESPONSIVE — COMPREHENSIVE
+   ══════════════════════════════════════════ */
+
+/* ── Desktop: hide bottom nav ── */
 @media (min-width: 992px) {
     body { padding-bottom: 0; }
     .bottom-nav { display: none !important; }
+}
+
+/* ── Tablet (≤768px) ── */
+@media (max-width: 768px) {
+    body { font-size: 14px; }
+
+    /* Navbar */
+    .navbar { height: 54px; padding: 0 12px; }
+    body { padding-top: 54px; }
+
+    /* Dashboard welcome card */
+    .welcome-card { padding: 12px 14px; }
+    .welcome-card h5 { font-size: 0.92rem; }
+    .user-avatar { font-size: 2rem; }
+    .dashboard-header { padding: 0 12px; margin-bottom: 12px !important; }
+
+    /* Menu cards — tighter padding */
+    .menu-card { padding: 12px 11px; }
+    .menu-icon { font-size: 1.5rem; margin-bottom: 5px; }
+    .menu-title { font-size: 0.82rem; }
+    .menu-desc { font-size: 0.7rem; }
+
+    /* Page container padding */
+    .container-fluid { padding-left: 10px !important; padding-right: 10px !important; }
+
+    /* Page header */
+    .page-header { padding: 0 10px; }
+    .page-header h5 { font-size: 0.88rem; }
+
+    /* Category filter — horizontal scroll */
+    .category-filter { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .category-filter .d-flex { flex-wrap: nowrap !important; padding-bottom: 4px; }
+    .category-filter .btn { white-space: nowrap; font-size: 0.75rem; padding: 4px 9px; flex-shrink: 0; }
+
+    /* Knowledge base — 2 columns */
+    .explosive-card-img { height: 130px; }
+
+    /* Detail main image */
+    .detail-main-image { max-height: 220px; }
+    .detail-main-image img { max-height: 220px; }
+
+    /* Parts gallery — 2 columns on mobile */
+    .parts-gallery { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .part-item img { height: 85px; }
+
+    /* Detail cards */
+    .detail-card { padding: 12px; }
+    .detail-section-title { font-size: 0.75rem; }
+    .property-row, .info-row {
+        flex-direction: column; gap: 2px;
+    }
+    .property-val, .info-val { text-align: left; }
+
+    /* Tables inside chapter/markdown — must scroll */
+    .chapter-body { padding: 14px; font-size: 0.84rem; }
+    .chapter-body table { display: block; overflow-x: auto; white-space: nowrap; }
+    .chapter-body pre { font-size: 0.75rem; }
+
+    /* Chapter list — collapsible on mobile */
+    .chapter-list-mobile-toggle {
+        display: flex !important;
+        align-items: center; justify-content: space-between;
+        padding: 10px 14px; background: var(--primary);
+        color: #93c5fd; font-size: 0.8rem; font-weight: 700;
+        cursor: pointer; border-radius: var(--radius);
+        text-transform: uppercase; letter-spacing: 0.5px;
+        border: none; width: 100%;
+    }
+    .chapter-list-body { display: none; }
+    .chapter-list-body.open { display: block; }
+    .chapter-list-title { display: none; }
+
+    /* Knowledge base card grid */
+    .knowledge-grid .col-md-6 { flex: 0 0 50%; max-width: 50%; }
+
+    /* Auth card */
+    .auth-card { padding: 20px 16px; }
+
+    /* Scan history */
+    .scan-history-item { padding: 10px 12px; }
+
+    /* Bottom nav */
+    .bottom-nav-item { font-size: 0.58rem; }
+    .bottom-nav-item i { font-size: 1.15rem; }
+
+    /* Emergency cards */
+    .emergency-card { padding: 11px 12px; gap: 10px; }
+    .emergency-icon { font-size: 1.3rem; }
+    .emergency-number { font-size: 1rem; }
+
+    /* Profile card */
+    .profile-card { padding: 14px; gap: 10px; }
+    .profile-avatar { font-size: 2.2rem; }
+    .profile-info h5 { font-size: 0.95rem; }
+
+    /* Action lists */
+    .action-item, .disposal-item { font-size: 0.84rem; padding: 7px 0; }
+    .types-list li, .component-list li, .safety-list li { font-size: 0.84rem; }
+
+    /* Threat banner */
+    .threat-banner { padding: 10px 12px; }
+
+    /* Indicators */
+    .indicator-list li { font-size: 0.84rem; padding: 5px 0; }
+
+    /* Explosive card in list */
+    .explosive-name { font-size: 0.85rem; }
+    .explosive-desc { font-size: 0.77rem; }
+    .explosive-card-header { padding: 10px 12px 7px; }
+    .explosive-card-body { padding: 8px 12px 10px; }
+
+    /* Section card */
+    .section-card { padding: 12px; }
+
+    /* Welcome card categories */
+    .cat-badge { font-size: 0.74rem; padding: 4px 10px; }
+}
+
+/* ── Small phone (≤400px) ── */
+@media (max-width: 400px) {
+    body { font-size: 13px; }
+
+    .navbar { padding: 0 8px; }
+    .brand-title { font-size: 0.88rem; }
+
+    /* 2-col dashboard still fine but reduce gap */
+    .row.g-3 { --bs-gutter-x: 8px; --bs-gutter-y: 8px; }
+
+    .menu-card { padding: 10px 8px; }
+    .menu-title { font-size: 0.78rem; }
+    .menu-icon { font-size: 1.35rem; }
+
+    /* Parts gallery stays 2 cols */
+    .part-item img { height: 72px; }
+    .part-label { font-size: 0.65rem; padding: 4px 5px; }
+
+    /* Bottom nav items */
+    .bottom-nav-item { font-size: 0.54rem; }
+    .bottom-nav-item i { font-size: 1.05rem; }
+
+    /* Category badges row — scrollable */
+    .cat-badge { font-size: 0.7rem; padding: 3px 8px; }
+
+    /* Action items */
+    .action-item, .disposal-item { font-size: 0.8rem; }
+
+    /* Chapter body */
+    .chapter-body { padding: 10px; font-size: 0.8rem; }
+    .chapter-header { padding: 12px 14px; }
+    .chapter-header h4 { font-size: 0.92rem; }
 }
 
 /* ── Autofill override ── */
