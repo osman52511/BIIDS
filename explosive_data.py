@@ -871,172 +871,209 @@ EXPLOSIVES_DATABASE = {
 }
 
 
-_W = 'https://commons.wikimedia.org/wiki/Special:FilePath/'
+_T = 'https://upload.wikimedia.org/wikipedia/commons/thumb/'
+
+# Verified real image URLs (Wikimedia Commons public domain / CC)
+_IED  = _T + 'a/a5/IED_Baghdad_from_munitions.jpg/480px-IED_Baghdad_from_munitions.jpg'
+_VBIED= _T + '5/5d/Car_bomb_in_Iraq.jpg/480px-Car_bomb_in_Iraq.jpg'
+_TNT  = _T + '0/05/Tools_of_the_Trade%2C_Motor_Transport_Marines_Learn_Explosive_Ordnance_Fundamentals_100820-m-1394j-007.jpg/480px-Tools_of_the_Trade%2C_Motor_Transport_Marines_Learn_Explosive_Ordnance_Fundamentals_100820-m-1394j-007.jpg'
+_C4   = _T + '2/2e/C4_plastic_explosive.jpg/480px-C4_plastic_explosive.jpg'
+_RDX  = _T + '9/93/RDX_crystal.jpg/480px-RDX_crystal.jpg'
+_NITRO= _T + '6/64/Nitro.JPG/400px-Nitro.JPG'
+_ANFO = _T + 'f/f8/Ammonium_nitrate-fuel_oil_%28ANFO%29_explosive.jpg/480px-Ammonium_nitrate-fuel_oil_%28ANFO%29_explosive.jpg'
+_DET  = _T + '2/2c/Detonator.jpg/480px-Detonator.jpg'
+_PMN  = _T + '3/31/PMN_%28rechts%29_und_PMN_2.jpeg/480px-PMN_%28rechts%29_und_PMN_2.jpeg'
+_PMN2 = _T + 'b/bd/PMN_anti-personnel_landmine_%28DOSAAF_Museum_in_Minsk%29.jpg/480px-PMN_anti-personnel_landmine_%28DOSAAF_Museum_in_Minsk%29.jpg'
+_CLAY = _T + 'c/c1/US_M18a1_claymore_mine.jpg/480px-US_M18a1_claymore_mine.jpg'
+_NVAL = _T + '8/82/Moored_contact_mine_Mk6.jpg/480px-Moored_contact_mine_Mk6.jpg'
+_MK82 = _T + 'e/e2/US_Navy_030529-N-0295M-007_Aviation_Ordnanceman_3rd_Class_Aaron_Harris_checks_a_MK-82_500lb._General_purpose_bomb.jpg/480px-US_Navy_030529-N-0295M-007_Aviation_Ordnanceman_3rd_Class_Aaron_Harris_checks_a_MK-82_500lb._General_purpose_bomb.jpg'
+_GAS  = _T + 'd/d9/Gas_mask_MUA_IMGP0157.jpg/480px-Gas_mask_MUA_IMGP0157.jpg'
+_GAS2 = _T + 'a/ae/Swiss_Army_gas_mask_model_90-IMG_7567.jpg/480px-Swiss_Army_gas_mask_model_90-IMG_7567.jpg'
+_GEIG = _T + '4/40/Geiger_counter.jpg/480px-Geiger_counter.jpg'
+_SUIT = _T + 'b/b5/British_army_officer_pays_tribute_in_an_EOD_bomb_suit_130303-A-RW508-001.jpg/480px-British_army_officer_pays_tribute_in_an_EOD_bomb_suit_130303-A-RW508-001.jpg'
+_ROBT = _T + '2/28/Explosive_ordnance_disposal_team_member_guides_bomb_disposal_robot_DVIDS365826.jpg/480px-Explosive_ordnance_disposal_team_member_guides_bomb_disposal_robot_DVIDS365826.jpg'
+_DISR = _T + 'c/c4/EOD_Marines_train_for_unique_threats_131023-M-LI810-324.jpg/480px-EOD_Marines_train_for_unique_threats_131023-M-LI810-324.jpg'
+_MDET = _T + '7/73/ANA_conducts_handheld_mine_detector_training_in_Zabul_140204-Z-HP669-004.jpg/480px-ANA_conducts_handheld_mine_detector_training_in_Zabul_140204-Z-HP669-004.jpg'
+_HOOK = _T + '7/73/Kyrgyz%2C_U.S._EOD_military_exchange_130424-F-QV958-007.jpg/480px-Kyrgyz%2C_U.S._EOD_military_exchange_130424-F-QV958-007.jpg'
+_XRAY = _T + '9/90/Iraqi_army_explosive_ordnance_disposal_%28EOD%29_soldiers_learn_how_to_operate_a_portable_x-ray_unit_during_EOD_training_in_the_Kirkuk_province_of_Iraq_Sept_100901-A-DM673-062.jpg/480px-Iraqi_army_explosive_ordnance_disposal_%28EOD%29_soldiers_learn_how_to_operate_a_portable_x-ray_unit_during_EOD_training_in_the_Kirkuk_province_of_Iraq_Sept_100901-A-DM673-062.jpg'
+_XRAY2= _T + 'f/f0/What%27s_inside%3F_EOD_technicians_crack_the_case_in_Italy_161129-M-VA786-048.jpg/480px-What%27s_inside%3F_EOD_technicians_crack_the_case_in_Italy_161129-M-VA786-048.jpg'
+_RADS = 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Radiation_warning_symbol.svg'
 
 EXPLOSIVE_IMAGES = {
     'bd_ied_001': {
-        'image_url': _W + 'IED_used_Afghanistan_2010.jpg',
+        'image_url': _IED,
         'gallery': [
-            {'label_bn': 'মূল চার্জ (TNT)', 'label_en': 'Main Charge (TNT)', 'url': _W + 'TNT_block.jpg'},
-            {'label_bn': 'ইলেকট্রিক ডেটোনেটর', 'label_en': 'Electric Detonator', 'url': _W + 'Electric_detonator.JPG'},
-            {'label_bn': 'ব্যাটারি পাওয়ার সোর্স', 'label_en': 'Battery Power Source', 'url': _W + '9-volt_battery.jpg'},
+            {'label_bn': 'আইইডি — বাগদাদ ২০০৫', 'label_en': 'IED Found — Baghdad 2005', 'url': _IED},
+            {'label_bn': 'মূল চার্জ (TNT ব্লক)', 'label_en': 'Main Charge — TNT Block', 'url': _TNT},
+            {'label_bn': 'ডেটোনেটর ও ব্লাস্টিং ক্যাপ', 'label_en': 'Detonator / Blasting Cap', 'url': _DET},
         ],
     },
     'bd_ied_002': {
-        'image_url': _W + 'VBIED.jpg',
+        'image_url': _VBIED,
         'gallery': [
-            {'label_bn': 'ANFO মিক্সচার', 'label_en': 'ANFO Explosive Mixture', 'url': _W + 'ANFO.jpg'},
-            {'label_bn': 'ডেটোনেটিং সিস্টেম', 'label_en': 'Detonating System', 'url': _W + 'Electric_detonator.JPG'},
-            {'label_bn': 'TNT মেইন চার্জ', 'label_en': 'TNT Main Charge', 'url': _W + 'TNT_block.jpg'},
+            {'label_bn': 'গাড়ি বোম্ব বিস্ফোরণ — ইরাক', 'label_en': 'Car Bomb Explosion — Iraq', 'url': _VBIED},
+            {'label_bn': 'ANFO বিস্ফোরক মিশ্রণ', 'label_en': 'ANFO Explosive Mixture', 'url': _ANFO},
+            {'label_bn': 'ডেটোনেটিং সিস্টেম', 'label_en': 'Detonating System', 'url': _DET},
         ],
     },
     'bd_ied_003': {
-        'image_url': _W + 'Suspicious_letter.jpg',
+        'image_url': _IED,
         'gallery': [
-            {'label_bn': 'প্রেশার সুইচ', 'label_en': 'Pressure/Pull Switch', 'url': _W + 'Mousetrap_IED.jpg'},
-            {'label_bn': 'ডেটোনেটর', 'label_en': 'Detonator', 'url': _W + 'Electric_detonator.JPG'},
+            {'label_bn': 'আইইডি উপাদান', 'label_en': 'IED Components', 'url': _IED},
+            {'label_bn': 'ডেটোনেটর', 'label_en': 'Detonator / Trigger', 'url': _DET},
+            {'label_bn': 'বিস্ফোরক চার্জ', 'label_en': 'Explosive Charge (TNT)', 'url': _TNT},
         ],
     },
     'he_001': {
-        'image_url': _W + 'TNT_block.jpg',
+        'image_url': _TNT,
         'gallery': [
-            {'label_bn': 'TNT ব্লক', 'label_en': 'TNT Block (Yellow)', 'url': _W + 'TNT_block.jpg'},
-            {'label_bn': 'রাসায়নিক গঠন', 'label_en': 'Chemical Structure', 'url': _W + '2,4,6-Trinitrotoluene.svg'},
-            {'label_bn': 'M112 ডেমোলিশন ব্লক', 'label_en': 'M112 Demolition Block', 'url': _W + 'M112_demolition_block.jpg'},
+            {'label_bn': 'TNT ব্লক — EOD রেঞ্জ', 'label_en': 'TNT Block at EOD Range', 'url': _TNT},
+            {'label_bn': 'RDX ক্রিস্টাল (তুলনা)', 'label_en': 'RDX Crystal (comparison)', 'url': _RDX},
+            {'label_bn': 'ANFO (সহজলভ্য বিকল্প)', 'label_en': 'ANFO (common substitute)', 'url': _ANFO},
         ],
     },
     'he_002': {
-        'image_url': _W + 'C4explosivesim.jpg',
+        'image_url': _C4,
         'gallery': [
-            {'label_bn': 'C4/PE ব্লক', 'label_en': 'C4/PE Block (White)', 'url': _W + 'C4explosivesim.jpg'},
-            {'label_bn': 'RDX রাসায়নিক সূত্র', 'label_en': 'RDX Chemical Structure', 'url': _W + 'RDX-3D-balls.png'},
-            {'label_bn': 'ডেটোনেটর সহ', 'label_en': 'With Electric Detonator', 'url': _W + 'Electric_detonator.JPG'},
+            {'label_bn': 'C4 প্লাস্টিক বিস্ফোরক', 'label_en': 'C4 Plastic Explosive Block', 'url': _C4},
+            {'label_bn': 'RDX ক্রিস্টাল (মূল উপাদান)', 'label_en': 'RDX Crystal (main component)', 'url': _RDX},
+            {'label_bn': 'ডেটোনেটর সহ ব্যবহার', 'label_en': 'Used with Detonator', 'url': _DET},
         ],
     },
     'he_003': {
-        'image_url': _W + 'RDX.jpg',
+        'image_url': _RDX,
         'gallery': [
-            {'label_bn': 'RDX পাউডার (সাদা)', 'label_en': 'RDX Powder (White)', 'url': _W + 'RDX.jpg'},
-            {'label_bn': 'রাসায়নিক সূত্র', 'label_en': 'Molecular Structure', 'url': _W + 'RDX-2D-skeletal.svg'},
+            {'label_bn': 'RDX ক্রিস্টাল', 'label_en': 'RDX Crystal (white solid)', 'url': _RDX},
+            {'label_bn': 'C4 (RDX-ভিত্তিক)', 'label_en': 'C4 (RDX-based explosive)', 'url': _C4},
+            {'label_bn': 'ডেটোনেটর', 'label_en': 'Detonator for initiation', 'url': _DET},
         ],
     },
     'he_004': {
-        'image_url': _W + 'Nitroglycerin_3.svg',
+        'image_url': _NITRO,
         'gallery': [
-            {'label_bn': 'অণুর গঠন', 'label_en': 'Molecular Structure', 'url': _W + 'Nitroglycerin_3.svg'},
-            {'label_bn': 'ডিনামাইট', 'label_en': 'Dynamite (NG-based)', 'url': _W + 'Dynamite.jpg'},
+            {'label_bn': 'নাইট্রোগ্লিসারিন (ফার্মাসিউটিক্যাল)', 'label_en': 'Nitroglycerin — pharmaceutical forms', 'url': _NITRO},
+            {'label_bn': 'ANFO (সাধারণ বিকল্প)', 'label_en': 'ANFO (common alternative)', 'url': _ANFO},
         ],
     },
     'he_005': {
-        'image_url': _W + 'ANFO.jpg',
+        'image_url': _ANFO,
         'gallery': [
-            {'label_bn': 'ANFO গ্রানিউলস', 'label_en': 'ANFO Granules', 'url': _W + 'ANFO.jpg'},
-            {'label_bn': 'অ্যামোনিয়াম নাইট্রেট', 'label_en': 'Ammonium Nitrate Prills', 'url': _W + 'Ammonium_nitrate_prills.jpg'},
+            {'label_bn': 'ANFO বিস্ফোরক', 'label_en': 'ANFO Explosive Material', 'url': _ANFO},
+            {'label_bn': 'TNT (তুলনীয় বিস্ফোরক)', 'label_en': 'TNT (comparable explosive)', 'url': _TNT},
+            {'label_bn': 'ডেটোনেটর', 'label_en': 'Detonator for initiation', 'url': _DET},
         ],
     },
     'det_001': {
-        'image_url': _W + 'Electric_detonator.JPG',
+        'image_url': _DET,
         'gallery': [
-            {'label_bn': 'ইলেকট্রিক ডেটোনেটর', 'label_en': 'Electric Detonator', 'url': _W + 'Electric_detonator.JPG'},
-            {'label_bn': 'ব্লাস্টিং ক্যাপ', 'label_en': 'Blasting Cap', 'url': _W + 'Blasting_caps.jpg'},
-            {'label_bn': 'ডেটোনেটিং কর্ড', 'label_en': 'Detonating Cord (DetCord)', 'url': _W + 'Det_cord.jpg'},
+            {'label_bn': 'ডেটোনেটর ৩ ধরন', 'label_en': 'Detonator — 3 types', 'url': _DET},
+            {'label_bn': 'EOD প্রশিক্ষণ — ডিসরাপ্টর', 'label_en': 'EOD Training with Disruptor', 'url': _DISR},
+            {'label_bn': 'মেটাল ডিটেক্টর (সার্চ)', 'label_en': 'Metal Detector for Search', 'url': _MDET},
         ],
     },
     'mine_001': {
-        'image_url': _W + 'PMN2mine.jpg',
+        'image_url': _PMN,
         'gallery': [
-            {'label_bn': 'PMN-2 ল্যান্ডমাইন', 'label_en': 'PMN-2 Anti-Personnel Mine', 'url': _W + 'PMN2mine.jpg'},
-            {'label_bn': 'M18A1 ক্লেমোর মাইন', 'label_en': 'M18A1 Claymore Mine', 'url': _W + 'M18A1_Claymore_mine.jpg'},
-            {'label_bn': 'মাইন ফিউজ', 'label_en': 'Mine Fuze/Pressure Plate', 'url': _W + 'Fuze_M606.jpg'},
+            {'label_bn': 'PMN ও PMN-2 মাইন', 'label_en': 'PMN & PMN-2 Mines', 'url': _PMN},
+            {'label_bn': 'PMN-2 (মিউজিয়াম)', 'label_en': 'PMN-2 Mine — Museum Display', 'url': _PMN2},
+            {'label_bn': 'M18A1 ক্লেমোর মাইন', 'label_en': 'M18A1 Claymore Mine', 'url': _CLAY},
+            {'label_bn': 'মাইন ডিটেক্টর দিয়ে সার্চ', 'label_en': 'Mine Search with Detector', 'url': _MDET},
         ],
     },
     'mine_002': {
-        'image_url': _W + 'Horned_Contact_Mine.jpg',
+        'image_url': _NVAL,
         'gallery': [
-            {'label_bn': 'হর্নড কন্ট্যাক্ট মাইন', 'label_en': 'Horned Contact Mine', 'url': _W + 'Horned_Contact_Mine.jpg'},
-            {'label_bn': 'লিমপেট মাইন', 'label_en': 'Limpet Mine', 'url': _W + 'Limpet_mine.jpg'},
+            {'label_bn': 'মুরড কন্ট্যাক্ট মাইন Mk.6', 'label_en': 'Moored Contact Mine Mk.6', 'url': _NVAL},
+            {'label_bn': 'EOD রোবট (প্রতিক্রিয়া)', 'label_en': 'EOD Robot (response)', 'url': _ROBT},
         ],
     },
     'aerial_001': {
-        'image_url': _W + 'Mk_82_bomb.jpg',
+        'image_url': _MK82,
         'gallery': [
-            {'label_bn': 'Mk-82 GP বোম্ব', 'label_en': 'Mk-82 General Purpose Bomb', 'url': _W + 'Mk_82_bomb.jpg'},
-            {'label_bn': 'নোজ ফিউজ', 'label_en': 'Nose Fuze (M904)', 'url': _W + 'M904_nose_fuze.jpg'},
-            {'label_bn': 'ফিন অ্যাসেম্বলি', 'label_en': 'Fin Assembly', 'url': _W + 'Bomb_fin_assembly.jpg'},
+            {'label_bn': 'Mk-82 500lb GP বোম্ব', 'label_en': 'Mk-82 500lb General Purpose Bomb', 'url': _MK82},
+            {'label_bn': 'EOD রোবট (UXO পরীক্ষা)', 'label_en': 'EOD Robot (UXO inspection)', 'url': _ROBT},
+            {'label_bn': 'EOD বোম্ব স্যুট', 'label_en': 'EOD Bomb Suit (disposal)', 'url': _SUIT},
         ],
     },
     'cbrn_001': {
-        'image_url': _W + 'Gas_mask_2_backgrounds.jpg',
+        'image_url': _GAS,
         'gallery': [
-            {'label_bn': 'গ্যাস মাস্ক', 'label_en': 'Gas Mask (CBRN Protection)', 'url': _W + 'Gas_mask_2_backgrounds.jpg'},
-            {'label_bn': 'সারিন অণুর গঠন', 'label_en': 'Sarin Chemical Structure', 'url': _W + 'Sarin-2D-skeletal.svg'},
-            {'label_bn': 'ডিকন্টামিনেশন', 'label_en': 'CBRN Decontamination', 'url': _W + 'CBRN_decontamination.jpg'},
+            {'label_bn': 'সামরিক গ্যাস মাস্ক (Polish MUA)', 'label_en': 'Military Gas Mask — Polish MUA', 'url': _GAS},
+            {'label_bn': 'সুইস আর্মি গ্যাস মাস্ক', 'label_en': 'Swiss Army Gas Mask Model-90', 'url': _GAS2},
+            {'label_bn': 'গিগার কাউন্টার', 'label_en': 'Geiger Counter (CBRN detection)', 'url': _GEIG},
         ],
     },
     'cbrn_002': {
-        'image_url': _W + 'Radiation_warning_symbol.svg',
+        'image_url': _GEIG,
         'gallery': [
-            {'label_bn': 'রেডিয়েশন সতর্কতা চিহ্ন', 'label_en': 'Radiation Warning Symbol', 'url': _W + 'Radiation_warning_symbol.svg'},
-            {'label_bn': 'গিগার কাউন্টার', 'label_en': 'Geiger Counter', 'url': _W + 'Geiger_counter.jpg'},
+            {'label_bn': 'গিগার কাউন্টার', 'label_en': 'Geiger-Müller Counter', 'url': _GEIG},
+            {'label_bn': 'রেডিয়েশন সতর্কতা চিহ্ন', 'label_en': 'Radiation Warning Symbol', 'url': _RADS},
+            {'label_bn': 'CBRN সুরক্ষা গ্যাস মাস্ক', 'label_en': 'CBRN Protective Gas Mask', 'url': _GAS},
         ],
     },
     'switch_001': {
-        'image_url': _W + 'Improvised_explosive_device.jpg',
+        'image_url': _IED,
         'gallery': [
-            {'label_bn': 'রিসিভার সার্কিট', 'label_en': 'Radio Receiver Circuit', 'url': _W + 'Radio_receiver_circuit.jpg'},
-            {'label_bn': 'মোবাইল ট্রিগার', 'label_en': 'Mobile Phone Trigger', 'url': _W + 'Mobile_phone.jpg'},
+            {'label_bn': 'আইইডি উপাদান', 'label_en': 'IED Components', 'url': _IED},
+            {'label_bn': 'ডেটোনেটর (ট্রিগার)', 'label_en': 'Detonator / Trigger Circuit', 'url': _DET},
+            {'label_bn': 'EOD রোবট (নিরাপদ প্রতিক্রিয়া)', 'label_en': 'EOD Robot (safe response)', 'url': _ROBT},
         ],
     },
     'switch_002': {
-        'image_url': _W + 'Suicide_vest.jpg',
+        'image_url': _SUIT,
         'gallery': [
-            {'label_bn': 'সুইসাইড ভেস্ট', 'label_en': 'PBIED/Suicide Vest', 'url': _W + 'Suicide_vest.jpg'},
-            {'label_bn': 'ডেড ম্যান সুইচ', 'label_en': 'Dead Man Switch', 'url': _W + 'Dead_man_switch.jpg'},
+            {'label_bn': 'EOD বোম্ব স্যুট (প্রতিক্রিয়া)', 'label_en': 'EOD Bomb Suit (response)', 'url': _SUIT},
+            {'label_bn': 'EOD রোবট', 'label_en': 'EOD Robot (standoff response)', 'url': _ROBT},
+            {'label_bn': 'আইইডি উপাদান', 'label_en': 'IED/PBIED Components', 'url': _IED},
         ],
     },
     # EOD Equipment
     'eod_001': {
-        'image_url': _W + 'Bomb_suit.jpg',
+        'image_url': _SUIT,
         'gallery': [
-            {'label_bn': 'ফুল বোম্ব স্যুট', 'label_en': 'Full EOD Bomb Suit', 'url': _W + 'Bomb_suit.jpg'},
-            {'label_bn': 'EOD হেলমেট ও ভাইজার', 'label_en': 'EOD Helmet & Visor', 'url': _W + 'EOD_helmet.jpg'},
-            {'label_bn': 'কুলিং ভেস্ট', 'label_en': 'Cooling Vest (inside)', 'url': _W + 'Cooling_vest.jpg'},
+            {'label_bn': 'EOD বোম্ব স্যুট — আফগানিস্তান', 'label_en': 'EOD Bomb Suit — Afghanistan', 'url': _SUIT},
+            {'label_bn': 'EOD রোবটের সাথে', 'label_en': 'With EOD Robot (team)', 'url': _ROBT},
+            {'label_bn': 'ডিসরাপ্টর প্রশিক্ষণ', 'label_en': 'Disruptor Training', 'url': _DISR},
         ],
     },
     'eod_002': {
-        'image_url': _W + 'PackBot.jpg',
+        'image_url': _ROBT,
         'gallery': [
-            {'label_bn': 'iRobot PackBot 510', 'label_en': 'iRobot PackBot 510', 'url': _W + 'PackBot.jpg'},
-            {'label_bn': 'রোবোটিক আর্ম', 'label_en': 'Robotic Arm Detail', 'url': _W + 'Robot_arm_EOD.jpg'},
-            {'label_bn': 'রিমোট কন্ট্রোল কনসোল', 'label_en': 'Remote Control Console', 'url': _W + 'EOD_robot_controller.jpg'},
+            {'label_bn': 'EOD রোবট — বোম্ব ডিসপোজাল', 'label_en': 'EOD Robot — Bomb Disposal', 'url': _ROBT},
+            {'label_bn': 'ডিসরাপ্টর প্রশিক্ষণ', 'label_en': 'Disruptor on Robot', 'url': _DISR},
+            {'label_bn': 'X-রে স্ক্যানিং', 'label_en': 'Portable X-Ray Unit', 'url': _XRAY},
         ],
     },
     'eod_003': {
-        'image_url': _W + 'PAN_Disruptor.jpg',
+        'image_url': _DISR,
         'gallery': [
-            {'label_bn': 'PAN Disruptor Mk5', 'label_en': 'PAN Disruptor Mk5', 'url': _W + 'PAN_Disruptor.jpg'},
-            {'label_bn': 'রোবটে মাউন্টেড', 'label_en': 'Mounted on EOD Robot', 'url': _W + 'Disruptor_on_robot.jpg'},
+            {'label_bn': 'PAN ডিসরাপ্টর প্রশিক্ষণ', 'label_en': 'PAN Disruptor — Marine EOD Training', 'url': _DISR},
+            {'label_bn': 'EOD রোবট (মাউন্ট)', 'label_en': 'EOD Robot (disruptor mounted)', 'url': _ROBT},
+            {'label_bn': 'EOD বোম্ব স্যুট', 'label_en': 'EOD Bomb Suit', 'url': _SUIT},
         ],
     },
     'eod_004': {
-        'image_url': _W + 'Metal_detector.jpg',
+        'image_url': _MDET,
         'gallery': [
-            {'label_bn': 'মেটাল ডিটেক্টর', 'label_en': 'Mine/Metal Detector', 'url': _W + 'Metal_detector.jpg'},
-            {'label_bn': 'প্রড দিয়ে তদন্ত', 'label_en': 'Prodding Technique', 'url': _W + 'Mine_probing.jpg'},
+            {'label_bn': 'হ্যান্ডহেল্ড মাইন ডিটেক্টর', 'label_en': 'Handheld Mine Detector — ANA Training', 'url': _MDET},
+            {'label_bn': 'PMN-2 মাইন (লক্ষ্যবস্তু)', 'label_en': 'PMN-2 Mine (what is detected)', 'url': _PMN},
+            {'label_bn': 'EOD বোম্ব স্যুট', 'label_en': 'EOD Bomb Suit', 'url': _SUIT},
         ],
     },
     'eod_005': {
-        'image_url': _W + 'Hook_and_line.jpg',
+        'image_url': _HOOK,
         'gallery': [
-            {'label_bn': 'হুক ও লাইন কিট', 'label_en': 'Hook & Line Kit', 'url': _W + 'Hook_and_line.jpg'},
-            {'label_bn': 'গ্র্যাপনেল হুক', 'label_en': 'Grapnel Hook Detail', 'url': _W + 'Grapnel_hook.jpg'},
+            {'label_bn': 'হুক ও লাইন কিট — EOD বিনিময়', 'label_en': 'Hook & Line Kit — EOD Exchange', 'url': _HOOK},
+            {'label_bn': 'EOD রোবট (বিকল্প)', 'label_en': 'EOD Robot (alternative)', 'url': _ROBT},
+            {'label_bn': 'আইইডি (লক্ষ্যবস্তু)', 'label_en': 'IED (target object)', 'url': _IED},
         ],
     },
     'eod_006': {
-        'image_url': _W + 'Portable_xray_eod.jpg',
+        'image_url': _XRAY,
         'gallery': [
-            {'label_bn': 'পোর্টেবল X-রে সিস্টেম', 'label_en': 'Portable X-Ray System', 'url': _W + 'Portable_xray_eod.jpg'},
-            {'label_bn': 'X-রে ইমেজ (IED)', 'label_en': 'X-Ray Image of IED', 'url': _W + 'Xray_IED_image.jpg'},
+            {'label_bn': 'পোর্টেবল X-রে — ইরাকি EOD', 'label_en': 'Portable X-Ray — Iraqi EOD Training', 'url': _XRAY},
+            {'label_bn': 'X-রে স্ক্যানিং — ইতালি', 'label_en': 'X-Ray Scanning — Italy EOD', 'url': _XRAY2},
+            {'label_bn': 'ডেটোনেটর (স্ক্যান টার্গেট)', 'label_en': 'Detonator (scan target)', 'url': _DET},
         ],
     },
 }

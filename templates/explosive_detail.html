@@ -17,6 +17,9 @@
     <div class="detail-main-image mb-3">
         <img src="{{ explosive.image_url }}" alt="{{ explosive.name }}"
              class="img-fluid rounded"
+             data-lb="gallery-{{ explosive.id }}"
+             data-lb-src="{{ explosive.image_url }}"
+             data-lb-caption="{{ explosive.name }}{% if lang == 'bn' and explosive.english_name %} — {{ explosive.english_name }}{% endif %}"
              onerror="this.parentElement.style.display='none'">
     </div>
     {% endif %}
@@ -76,9 +79,14 @@
         <div class="parts-gallery">
             {% for part in explosive.gallery %}
             <div class="part-item">
-                <img src="{{ part.url }}" alt="{{ part.label_bn if lang == 'bn' else part.label_en }}"
+                <img src="{{ part.url }}"
+                     alt="{{ part.label_bn if lang == 'bn' else part.label_en }}"
+                     data-lb="gallery-{{ explosive.id }}"
+                     data-lb-src="{{ part.url }}"
+                     data-lb-caption="{{ part.label_bn if lang == 'bn' else part.label_en }}"
                      onerror="this.src='';this.parentElement.classList.add('img-error')">
                 <div class="part-label">
+                    <i class="bi bi-zoom-in" style="font-size:0.65rem;opacity:0.6;margin-right:3px"></i>
                     {{ part.label_bn if lang == 'bn' else part.label_en }}
                 </div>
             </div>

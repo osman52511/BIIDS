@@ -79,9 +79,15 @@
                 {% if exp.image_url %}
                 <div class="explosive-card-img">
                     <img src="{{ exp.image_url }}" alt="{{ exp.name }}"
+                         data-lb="kb-{{ exp.id }}"
+                         data-lb-src="{{ exp.image_url }}"
+                         data-lb-caption="{{ exp.name }}"
                          onerror="this.parentElement.style.display='none'">
                     <div class="threat-badge-overlay threat-{{ exp.threat_level }}">
                         {{ exp.threat_level | upper }}
+                    </div>
+                    <div class="card-img-zoom-hint">
+                        <i class="bi bi-zoom-in"></i>
                     </div>
                 </div>
                 {% endif %}
