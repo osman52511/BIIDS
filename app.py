@@ -14,7 +14,7 @@ import secrets
 from datetime import datetime
 from functools import wraps
 from flask import (Flask, render_template, request, redirect, url_for,
-                   session, flash, jsonify)
+                   session, flash, jsonify, send_from_directory)
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 import anthropic
@@ -307,6 +307,18 @@ def enrich_result_with_db(result, lang='bn'):
 
 
 # ─── Routes ───────────────────────────────────────────────────────────────────
+
+@app.route('/sw.js')
+def service_worker():
+    resp = send_from_directory(os.path.join(app.root_path, 'static', 'js'), 'sw.js')
+    resp.headers['Content-Type'] = 'application/javascript'
+    resp.headers['Service-Worker-Allowed'] = '/'
+    return resp
+
+@app.route('/manifest.json')
+def manifest():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'manifest.json',
+                               mimetype='application/manifest+json')
 
 @app.route('/')
 def index():
