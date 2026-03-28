@@ -35,16 +35,18 @@ app = Flask(__name__)
 # Secret key - use env var in production for session stability
 app.secret_key = os.environ.get('SECRET_KEY', secrets.token_hex(32))
 
-# Database - use Supabase PostgreSQL in production, SQLite locally
-_db_url = os.environ.get('DATABASE_URL', f'sqlite:///{os.path.join(BASE_DIR, "biids.db")}')
-# Fix URL scheme for SQLAlchemy
-if _db_url.startswith('postgres://'):
-    _db_url = _db_url.replace('postgres://', 'postgresql+psycopg2://', 1)
-elif _db_url.startswith('postgresql://') and '+psycopg2' not in _db_url:
-    _db_url = _db_url.replace('postgresql://', 'postgresql+psycopg2://', 1)
-# Add SSL for Supabase
-if 'supabase' in _db_url and 'sslmode' not in _db_url:
-    _db_url += '?sslmode=require'
+# Database - build URL from separate params to avoid URL encoding issues
+import urllib.parse as _urlparse
+
+_db_host = os.environ.get('DB_HOST', '')
+_db_user = os.environ.get('DB_USER', '')
+_db_pass = os.environ.get('DB_PASS', '')
+
+if _db_host and _db_user and _db_pass:
+    _encoded_pass = _urlparse.quote(_db_pass, safe='')
+    _db_url = f'postgresql+psycopg2://{_db_user}:{_encoded_pass}@{_db_host}:5432/postgres?sslmode=require'
+else:
+    _db_url = f'sqlite:///{os.path.join(BASE_DIR, "biids.db")}'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = _db_url
 app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {'pool_pre_ping': True, 'pool_recycle': 300}
