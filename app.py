@@ -576,25 +576,27 @@ def emergency():
 # ─── Initialize Database ──────────────────────────────────────────────────────
 
 def init_db():
-    with app.app_context():
-        db.create_all()
-        # Create demo user if no users exist
-        if User.query.count() == 0:
-            demo_user = User(
-                personal_number='DEMO001',
-                number_type='army_number',
-                full_name='Demo User',
-                rank='Captain',
-                mobile='01700000000',
-                email='demo@army.mil.bd',
-                unit='EOD Unit, Dhaka',
-                organization='Bangladesh Army',
-                password_hash=bcrypt.generate_password_hash('demo123').decode('utf-8'),
-                language='bn',
-            )
-            db.session.add(demo_user)
-            db.session.commit()
-            print("Demo user created: DEMO001 / demo123")
+    try:
+        with app.app_context():
+            db.create_all()
+            if User.query.count() == 0:
+                demo_user = User(
+                    personal_number='DEMO001',
+                    number_type='army_number',
+                    full_name='Demo User',
+                    rank='Captain',
+                    mobile='01700000000',
+                    email='demo@army.mil.bd',
+                    unit='EOD Unit, Dhaka',
+                    organization='Bangladesh Army',
+                    password_hash=bcrypt.generate_password_hash('demo123').decode('utf-8'),
+                    language='bn',
+                )
+                db.session.add(demo_user)
+                db.session.commit()
+                print("Demo user created: DEMO001 / demo123")
+    except Exception as e:
+        print(f"DB init warning: {e}")
 
 
 # Always run init_db — works for both `python app.py` and gunicorn
