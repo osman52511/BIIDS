@@ -35,21 +35,25 @@ app = Flask(__name__)
 # Secret key - use env var in production for session stability
 app.secret_key = os.environ.get('SECRET_KEY', secrets.token_hex(32))
 
-# Database - build URL from separate params to avoid URL encoding issues
-import urllib.parse as _urlparse
-
+# Database - use creator function to bypass URL parsing (handles special chars in password)
 _db_host = os.environ.get('DB_HOST', '')
 _db_user = os.environ.get('DB_USER', '')
 _db_pass = os.environ.get('DB_PASS', '')
 
 if _db_host and _db_user and _db_pass:
-    _encoded_pass = _urlparse.quote(_db_pass, safe='')
-    _db_url = f'postgresql+psycopg2://{_db_user}:{_encoded_pass}@{_db_host}:5432/postgres?sslmode=require'
+    import psycopg2 as _psycopg2
+    def _pg_creator():
+        return _psycopg2.connect(
+            host=_db_host, port=5432, dbname='postgres',
+            user=_db_user, password=_db_pass, sslmode='require'
+        )
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://'
+    app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+        'creator': _pg_creator, 'pool_pre_ping': True, 'pool_recycle': 300
+    }
 else:
-    _db_url = f'sqlite:///{os.path.join(BASE_DIR, "biids.db")}'
-
-app.config['SQLALCHEMY_DATABASE_URI'] = _db_url
-app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {'pool_pre_ping': True, 'pool_recycle': 300}
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(BASE_DIR, "biids.db")}'
+    app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {'pool_pre_ping': True, 'pool_recycle': 300}
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = os.path.join(BASE_DIR, 'static', 'uploads')
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
