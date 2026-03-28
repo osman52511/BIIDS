@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block title %}{{ tr('emergency_title') }} — {{ tr('app_title') }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-3 pb-5">
+    <div class="page-header mb-3">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-sm btn-outline-secondary me-2">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+        <h5 class="d-inline mb-0">
+            <i class="bi bi-telephone-fill me-2 text-danger"></i>{{ tr('emergency_title') }}
+        </h5>
+    </div>
+
+    <!-- Emergency Warning -->
+    <div class="alert alert-danger mb-3">
+        <i class="bi bi-exclamation-octagon-fill me-2"></i>
+        {% if lang == 'bn' %}
+        <strong>জরুরি পরিস্থিতিতে আগে নিজেকে ও অন্যদের নিরাপদ রাখুন, তারপর নিচের নম্বরে যোগাযোগ করুন।</strong>
+        {% else %}
+        <strong>In emergency, first keep yourself and others safe, then contact the numbers below.</strong>
+        {% endif %}
+    </div>
+
+    <!-- Emergency Contacts -->
+    <div class="emergency-grid">
+
+        <!-- Bangladesh Army EOD -->
+        <div class="emergency-card emergency-army">
+            <div class="emergency-icon"><i class="bi bi-shield-fill"></i></div>
+            <div class="emergency-info">
+                <h6>{% if lang == 'bn' %}বাংলাদেশ সেনাবাহিনী ইওডি{% else %}Bangladesh Army EOD{% endif %}</h6>
+                <a href="tel:01769600999" class="emergency-number">01769-600-999</a>
+                <small>{% if lang == 'bn' %}২৪ ঘণ্টা উপলব্ধ{% else %}24/7 Available{% endif %}</small>
+            </div>
+        </div>
+
+        <!-- Police Emergency -->
+        <div class="emergency-card emergency-police">
+            <div class="emergency-icon"><i class="bi bi-person-badge"></i></div>
+            <div class="emergency-info">
+                <h6>{% if lang == 'bn' %}জাতীয় জরুরি সেবা{% else %}National Emergency{% endif %}</h6>
+                <a href="tel:999" class="emergency-number">999</a>
+                <small>{% if lang == 'bn' %}পুলিশ, ফায়ার, অ্যাম্বুলেন্স{% else %}Police, Fire, Ambulance{% endif %}</small>
+            </div>
+        </div>
+
+        <!-- RAB -->
+        <div class="emergency-card emergency-rab">
+            <div class="emergency-icon"><i class="bi bi-star-fill"></i></div>
+            <div class="emergency-info">
+                <h6>{% if lang == 'bn' %}র‌্যাব হেডকোয়ার্টার{% else %}RAB Headquarters{% endif %}</h6>
+                <a href="tel:01713370000" class="emergency-number">01713-370-000</a>
+                <small>{% if lang == 'bn' %}কাউন্টার টেরোরিজম{% else %}Counter Terrorism{% endif %}</small>
+            </div>
+        </div>
+
+        <!-- Police DB -->
+        <div class="emergency-card emergency-police">
+            <div class="emergency-icon"><i class="bi bi-search"></i></div>
+            <div class="emergency-info">
+                <h6>{% if lang == 'bn' %}পুলিশ ডিটেক্টিভ ব্রাঞ্চ{% else %}Police Detective Branch{% endif %}</h6>
+                <a href="tel:01711006119" class="emergency-number">01711-006-119</a>
+                <small>{% if lang == 'bn' %}ডিবি পুলিশ{% else %}DB Police{% endif %}</small>
+            </div>
+        </div>
+
+        <!-- Fire Service -->
+        <div class="emergency-card emergency-fire">
+            <div class="emergency-icon"><i class="bi bi-fire"></i></div>
+            <div class="emergency-info">
+                <h6>{% if lang == 'bn' %}ফায়ার সার্ভিস{% else %}Fire Service{% endif %}</h6>
+                <a href="tel:01991310999" class="emergency-number">16163</a>
+                <small>{% if lang == 'bn' %}অগ্নি ও বিপদ মোকাবেলা{% else %}Fire & Disaster Response{% endif %}</small>
+            </div>
+        </div>
+
+        <!-- DGFI -->
+        <div class="emergency-card emergency-army">
+            <div class="emergency-icon"><i class="bi bi-eye-fill"></i></div>
+            <div class="emergency-info">
+                <h6>{% if lang == 'bn' %}সামরিক গোয়েন্দা{% else %}Military Intelligence{% endif %}</h6>
+                <a href="tel:02-8870081" class="emergency-number">02-8870081</a>
+                <small>{% if lang == 'bn' %}ডিজিএফআই{% else %}DGFI{% endif %}</small>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Quick Action Guide -->
+    <div class="detail-card mt-4">
+        <h6 class="detail-section-title text-danger">
+            <i class="bi bi-lightning-fill me-2"></i>
+            {% if lang == 'bn' %}বিস্ফোরক দেখলে তাৎক্ষণিক করণীয়{% else %}Immediate Actions When Seeing Explosive{% endif %}
+        </h6>
+        {% if lang == 'bn' %}
+        <ol class="action-list">
+            <li>থামুন — নড়াচড়া বন্ধ করুন</li>
+            <li>পিছনে সরে যান — কমপক্ষে ৩০০ মিটার</li>
+            <li>অন্যদের সতর্ক করুন</li>
+            <li>মোবাইল ফোন বন্ধ করুন</li>
+            <li>EOD/পুলিশকে ফোন করুন: 999 বা 01769-600-999</li>
+            <li>কর্তৃপক্ষ না আসা পর্যন্ত এলাকা বন্ধ রাখুন</li>
+            <li>কখনো নিজে সরানোর চেষ্টা করবেন না</li>
+        </ol>
+        {% else %}
+        <ol class="action-list">
+            <li>STOP — Stop moving</li>
+            <li>Move back — at least 300 meters</li>
+            <li>Warn others</li>
+            <li>Turn off mobile phones</li>
+            <li>Call EOD/Police: 999 or 01769-600-999</li>
+            <li>Keep area sealed until authorities arrive</li>
+            <li>Never try to remove it yourself</li>
+        </ol>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}

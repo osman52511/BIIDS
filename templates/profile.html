@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block title %}{{ tr('profile_title') }} — {{ tr('app_title') }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-3 pb-5">
+    <div class="page-header mb-3">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-sm btn-outline-secondary me-2">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+        <h5 class="d-inline mb-0"><i class="bi bi-person-gear me-2 text-army"></i>{{ tr('profile_title') }}</h5>
+    </div>
+
+    <!-- User Card -->
+    <div class="profile-card mb-4">
+        <div class="profile-avatar">
+            <i class="bi bi-person-circle"></i>
+        </div>
+        <div class="profile-info">
+            <h5>{{ user.full_name }}</h5>
+            {% if user.rank %}<p class="mb-0 text-muted">{{ user.rank }}</p>{% endif %}
+            <p class="mb-0"><span class="badge bg-army">{{ user.personal_number }}</span></p>
+        </div>
+    </div>
+
+    <!-- Personal Info -->
+    <div class="detail-card mb-3">
+        <h6 class="detail-section-title"><i class="bi bi-person me-2"></i>{{ tr('personal_info') }}</h6>
+        <div class="info-grid">
+            <div class="info-row">
+                <span class="info-label">{% if lang == 'bn' %}নম্বরের ধরন{% else %}Number Type{% endif %}</span>
+                <span class="info-val">{{ tr(user.number_type) }}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">{{ tr('personal_number') }}</span>
+                <span class="info-val fw-bold">{{ user.personal_number }}</span>
+            </div>
+            {% if user.rank %}
+            <div class="info-row">
+                <span class="info-label">{{ tr('rank') }}</span>
+                <span class="info-val">{{ user.rank }}</span>
+            </div>
+            {% endif %}
+            <div class="info-row">
+                <span class="info-label">{{ tr('full_name') }}</span>
+                <span class="info-val">{{ user.full_name }}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">{{ tr('mobile') }}</span>
+                <span class="info-val">{{ user.mobile }}</span>
+            </div>
+            {% if user.email %}
+            <div class="info-row">
+                <span class="info-label">{{ tr('email') }}</span>
+                <span class="info-val">{{ user.email }}</span>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Service Info -->
+    <div class="detail-card mb-3">
+        <h6 class="detail-section-title"><i class="bi bi-building me-2"></i>{{ tr('service_info') }}</h6>
+        <div class="info-grid">
+            <div class="info-row">
+                <span class="info-label">{{ tr('organization') }}</span>
+                <span class="info-val">{{ user.organization }}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">{{ tr('unit') }}</span>
+                <span class="info-val">{{ user.unit }}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">{% if lang == 'bn' %}নিবন্ধনের তারিখ{% else %}Registered On{% endif %}</span>
+                <span class="info-val">{{ user.created_at.strftime('%d %b %Y') }}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Password -->
+    <div class="detail-card mb-3">
+        <h6 class="detail-section-title"><i class="bi bi-lock me-2"></i>{{ tr('change_password') }}</h6>
+        <form method="POST" action="{{ url_for('profile') }}">
+            <input type="hidden" name="action" value="change_password">
+            <div class="mb-2">
+                <input type="password" name="current_password" class="form-control"
+                       placeholder="{{ tr('current_password') }}" required>
+            </div>
+            <div class="mb-2">
+                <input type="password" name="new_password" class="form-control"
+                       placeholder="{{ tr('new_password') }}" minlength="6" required>
+            </div>
+            <div class="mb-3">
+                <input type="password" name="confirm_password" class="form-control"
+                       placeholder="{{ tr('confirm_password') }}" required>
+            </div>
+            <button type="submit" class="btn btn-army w-100">
+                <i class="bi bi-check me-1"></i>{{ tr('submit') }}
+            </button>
+        </form>
+    </div>
+
+    <!-- Language Setting -->
+    <div class="detail-card mb-3">
+        <h6 class="detail-section-title"><i class="bi bi-translate me-2"></i>{{ tr('select_language') }}</h6>
+        <div class="d-flex gap-2">
+            <a href="{{ url_for('set_language', lang='bn') }}"
+               class="btn flex-fill {{ 'btn-army' if lang == 'bn' else 'btn-outline-secondary' }}">বাংলা</a>
+            <a href="{{ url_for('set_language', lang='en') }}"
+               class="btn flex-fill {{ 'btn-army' if lang == 'en' else 'btn-outline-secondary' }}">English</a>
+        </div>
+    </div>
+
+    <!-- Logout -->
+    <a href="{{ url_for('logout') }}" class="btn btn-outline-danger w-100">
+        <i class="bi bi-box-arrow-right me-2"></i>{{ tr('logout') }}
+    </a>
+</div>
+{% endblock %}

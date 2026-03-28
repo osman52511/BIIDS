@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+{% block title %}{{ tr('register') }} — {{ tr('app_title') }}{% endblock %}
+
+{% block content %}
+<div class="auth-page py-5">
+    <div class="auth-card register-card mx-auto">
+        <!-- Header -->
+        <div class="auth-header text-center mb-4">
+            <div class="auth-logo">
+                <i class="bi bi-person-plus-fill"></i>
+            </div>
+            <h4 class="auth-title">{{ tr('register') }}</h4>
+            <p class="auth-subtitle">{{ tr('app_subtitle') }}</p>
+        </div>
+
+        <form method="POST" action="{{ url_for('register') }}" class="auth-form">
+
+            <!-- Language Selection -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">
+                    <i class="bi bi-translate me-1"></i>{{ tr('select_language') }}
+                </label>
+                <div class="d-flex gap-2">
+                    <div class="form-check flex-fill">
+                        <input class="form-check-input" type="radio" name="language" value="bn"
+                               id="langBn" {{ 'checked' if lang == 'bn' }}>
+                        <label class="form-check-label" for="langBn">বাংলা</label>
+                    </div>
+                    <div class="form-check flex-fill">
+                        <input class="form-check-input" type="radio" name="language" value="en"
+                               id="langEn" {{ 'checked' if lang == 'en' }}>
+                        <label class="form-check-label" for="langEn">English</label>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-3">
+
+            <!-- Personal Number Type -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">
+                    <i class="bi bi-id-card me-1"></i>{{ tr('number_type') }} <span class="text-danger">*</span>
+                </label>
+                <select name="number_type" class="form-select" required>
+                    <option value="">-- {{ tr('number_type') }} --</option>
+                    <option value="army_number">{{ tr('army_number') }}</option>
+                    <option value="ba_number">{{ tr('ba_number') }}</option>
+                    <option value="naval_number">{{ tr('naval_number') }}</option>
+                    <option value="air_number">{{ tr('air_number') }}</option>
+                    <option value="police_number">{{ tr('police_number') }}</option>
+                    <option value="rab_number">{{ tr('rab_number') }}</option>
+                    <option value="other_number">{{ tr('other_number') }}</option>
+                </select>
+            </div>
+
+            <!-- Personal Number -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">
+                    <i class="bi bi-person-badge me-1"></i>{{ tr('personal_number') }} <span class="text-danger">*</span>
+                </label>
+                <input type="text" name="personal_number" class="form-control"
+                       placeholder="{{ tr('personal_number_placeholder') }}"
+                       required autocapitalize="characters"
+                       style="text-transform: uppercase;">
+                <small class="text-muted">
+                    {% if lang == 'bn' %}উদাহরণ: BD-12345, BA/12345, SSA-1234{% else %}Example: BD-12345, BA/12345, SSA-1234{% endif %}
+                </small>
+            </div>
+
+            <!-- Rank -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">
+                    <i class="bi bi-chevron-double-up me-1"></i>{{ tr('rank') }}
+                </label>
+                <input type="text" name="rank" class="form-control"
+                       placeholder="{% if lang == 'bn' %}যেমন: মেজর, ক্যাপ্টেন, সার্জেন্ট{% else %}e.g. Major, Captain, Sergeant{% endif %}">
+            </div>
+
+            <!-- Full Name -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">
+                    <i class="bi bi-person me-1"></i>{{ tr('full_name') }} <span class="text-danger">*</span>
+                </label>
+                <input type="text" name="full_name" class="form-control"
+                       placeholder="{% if lang == 'bn' %}আপনার পূর্ণ নাম{% else %}Your full name{% endif %}" required>
+            </div>
+
+            <!-- Mobile -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">
+                    <i class="bi bi-phone me-1"></i>{{ tr('mobile') }} <span class="text-danger">*</span>
+                </label>
+                <input type="tel" name="mobile" class="form-control"
+                       placeholder="01XXXXXXXXX" required>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">
+                    <i class="bi bi-envelope me-1"></i>{{ tr('email') }}
+                </label>
+                <input type="email" name="email" class="form-control"
+                       placeholder="example@army.mil.bd">
+            </div>
+
+            <!-- Organization -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">
+                    <i class="bi bi-building me-1"></i>{{ tr('organization') }} <span class="text-danger">*</span>
+                </label>
+                <select name="organization" class="form-select" required>
+                    <option value="">-- {{ tr('organization') }} --</option>
+                    <option value="Bangladesh Army">{{ tr('org_army') }}</option>
+                    <option value="Bangladesh Navy">{{ tr('org_navy') }}</option>
+                    <option value="Bangladesh Air Force">{{ tr('org_air') }}</option>
+                    <option value="Bangladesh Police">{{ tr('org_police') }}</option>
+                    <option value="RAB">{{ tr('org_rab') }}</option>
+                    <option value="BGB">{{ tr('org_bdr') }}</option>
+                    <option value="Ansar">{{ tr('org_ansar') }}</option>
+                    <option value="Other">{{ tr('org_other') }}</option>
+                </select>
+            </div>
+
+            <!-- Unit -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">
+                    <i class="bi bi-geo-alt me-1"></i>{{ tr('unit') }} <span class="text-danger">*</span>
+                </label>
+                <input type="text" name="unit" class="form-control"
+                       placeholder="{% if lang == 'bn' %}ইউনিট/স্টেশন{% else %}Unit/Station{% endif %}" required>
+            </div>
+
+            <hr class="my-3">
+
+            <!-- Password -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">
+                    <i class="bi bi-lock me-1"></i>{{ tr('password') }} <span class="text-danger">*</span>
+                </label>
+                <div class="input-group">
+                    <input type="password" name="password" id="regPassword"
+                           class="form-control" minlength="6"
+                           placeholder="{% if lang == 'bn' %}কমপক্ষে ৬ অক্ষর{% else %}Minimum 6 characters{% endif %}" required>
+                    <button class="btn btn-outline-secondary" type="button"
+                            onclick="togglePassword('regPassword', 'regPassIcon')">
+                        <i class="bi bi-eye" id="regPassIcon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="mb-4">
+                <label class="form-label fw-semibold">
+                    <i class="bi bi-lock-fill me-1"></i>{{ tr('confirm_password') }} <span class="text-danger">*</span>
+                </label>
+                <div class="input-group">
+                    <input type="password" name="confirm_password" id="regConfirmPassword"
+                           class="form-control"
+                           placeholder="{% if lang == 'bn' %}পাসওয়ার্ড পুনরায় লিখুন{% else %}Re-enter password{% endif %}" required>
+                    <button class="btn btn-outline-secondary" type="button"
+                            onclick="togglePassword('regConfirmPassword', 'regConfirmIcon')">
+                        <i class="bi bi-eye" id="regConfirmIcon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-army btn-lg w-100 mb-3">
+                <i class="bi bi-person-check me-2"></i>{{ tr('register_btn') }}
+            </button>
+        </form>
+
+        <div class="text-center">
+            <span class="text-muted">{{ tr('have_account') }}</span>
+            <a href="{{ url_for('login') }}" class="auth-link">{{ tr('login_link') }}</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function togglePassword(fieldId, iconId) {
+    const field = document.getElementById(fieldId);
+    const icon = document.getElementById(iconId);
+    if (field.type === 'password') {
+        field.type = 'text';
+        icon.classList.replace('bi-eye', 'bi-eye-slash');
+    } else {
+        field.type = 'password';
+        icon.classList.replace('bi-eye-slash', 'bi-eye');
+    }
+}
+
+// Auto uppercase personal number
+document.querySelector('[name="personal_number"]').addEventListener('input', function() {
+    this.value = this.value.toUpperCase();
+});
+</script>
+{% endblock %}

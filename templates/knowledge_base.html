@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block title %}{{ tr('kb_title') }} — {{ tr('app_title') }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-3 pb-5">
+
+    <!-- Page Header -->
+    <div class="page-header mb-3">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-sm btn-outline-secondary me-2">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+        <h5 class="d-inline mb-0">
+            <i class="bi bi-book-fill me-2 text-army"></i>{{ tr('kb_title') }}
+        </h5>
+    </div>
+
+    <!-- Search -->
+    <form method="GET" action="{{ url_for('knowledge_base') }}" class="mb-3">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" value="{{ query }}"
+                   placeholder="{{ tr('search_placeholder') }}">
+            <button class="btn btn-army" type="submit">
+                <i class="bi bi-search"></i>
+            </button>
+        </div>
+    </form>
+
+    <!-- Category Filter -->
+    <div class="category-filter mb-3">
+        <div class="d-flex flex-wrap gap-2">
+            {% set cat_labels = {
+                'all': tr('all_types'),
+                'ied': 'IED',
+                'conventional': tr('conventional'),
+                'mines': tr('mines'),
+                'aerial': tr('aerial'),
+                'naval': tr('naval'),
+                'cbrn': 'CBRN'
+            } %}
+            {% for cat in categories %}
+            <a href="{{ url_for('knowledge_base', category=cat, q=query) }}"
+               class="btn btn-sm {{ 'btn-army' if category == cat else 'btn-outline-secondary' }}">
+                {% if cat == 'ied' %}<i class="bi bi-radioactive me-1"></i>
+                {% elif cat == 'cbrn' %}<i class="bi bi-biohazard me-1"></i>
+                {% elif cat == 'mines' %}<i class="bi bi-circle me-1"></i>
+                {% elif cat == 'aerial' %}<i class="bi bi-airplane me-1"></i>
+                {% elif cat == 'naval' %}<i class="bi bi-water me-1"></i>
+                {% elif cat == 'conventional' %}<i class="bi bi-boxes me-1"></i>
+                {% endif %}
+                {{ cat_labels[cat] }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Bangladesh Priority Notice -->
+    {% if category == 'all' or category == 'ied' %}
+    <div class="alert alert-sm alert-warning py-2 mb-3">
+        <i class="bi bi-flag me-1"></i>
+        {% if lang == 'bn' %}বাংলাদেশের তথ্য অগ্রাধিকারে প্রথমে দেখানো হচ্ছে{% else %}Bangladesh information shown with priority first{% endif %}
+    </div>
+    {% endif %}
+
+    <!-- Results Count -->
+    <p class="text-muted mb-3">
+        {% if lang == 'bn' %}{{ explosives|length }}টি ফলাফল{% else %}{{ explosives|length }} Results{% endif %}
+        {% if query %} — "{{ query }}"{% endif %}
+    </p>
+
+    <!-- Explosives List -->
+    {% if explosives %}
+    <div class="row g-3">
+        {% for exp in explosives %}
+        <div class="col-12 col-md-6 col-lg-4">
+            <a href="{{ url_for('explosive_detail', explosive_id=exp.id) }}"
+               class="explosive-card text-decoration-none">
+                <div class="explosive-card-header">
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div>
+                            {% if exp.origin == 'bangladesh' %}
+                            <span class="badge bg-success mb-1">
+                                <i class="bi bi-flag me-1"></i>Bangladesh
+                            </span>
+                            {% endif %}
+                            <h6 class="explosive-name mb-0">{{ exp.name }}</h6>
+                            {% if lang == 'bn' and exp.english_name %}
+                            <small class="text-muted">{{ exp.english_name }}</small>
+                            {% elif lang == 'en' and exp.bengali_name %}
+                            <small class="text-muted">{{ exp.bengali_name }}</small>
+                            {% endif %}
+                        </div>
+                        <div class="threat-badge threat-{{ exp.threat_level }}">
+                            {{ exp.threat_level | upper }}
+                        </div>
+                    </div>
+                </div>
+                <div class="explosive-card-body">
+                    <p class="explosive-desc">{{ exp.description[:120] }}...</p>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <span class="category-chip category-{{ exp.category }}">
+                            {{ exp.category | upper }}
+                        </span>
+                        <span class="text-army small">
+                            {{ tr('view_details') }} <i class="bi bi-arrow-right"></i>
+                        </span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-5">
+        <i class="bi bi-search fs-1 text-muted"></i>
+        <p class="text-muted mt-2">{{ tr('no_results') }}</p>
+        <a href="{{ url_for('knowledge_base') }}" class="btn btn-outline-army">
+            {% if lang == 'bn' %}সব দেখুন{% else %}View All{% endif %}
+        </a>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

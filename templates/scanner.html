@@ -1,0 +1,387 @@
+{% extends "base.html" %}
+{% block title %}{{ tr('scanner_title') }} — {{ tr('app_title') }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-3 pb-5">
+
+    <!-- Page Header -->
+    <div class="page-header mb-3">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-sm btn-outline-secondary me-2">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+        <h5 class="d-inline mb-0">
+            <i class="bi bi-camera-fill me-2 text-army"></i>{{ tr('scanner_title') }}
+        </h5>
+    </div>
+
+    <!-- Warning Banner -->
+    <div class="alert alert-danger alert-sm mb-3 py-2">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        <strong>{{ tr('warning_label') }}:</strong> {{ tr('scanner_warning') }}
+    </div>
+
+    <!-- Tab Switch -->
+    <ul class="nav nav-pills nav-fill mb-3" id="scannerTabs">
+        <li class="nav-item">
+            <button class="nav-link active" onclick="showTab('camera')">
+                <i class="bi bi-camera me-1"></i>{{ tr('camera_scan') }}
+            </button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" onclick="showTab('upload')">
+                <i class="bi bi-upload me-1"></i>{{ tr('upload_image') }}
+            </button>
+        </li>
+    </ul>
+
+    <!-- Camera Tab -->
+    <div id="cameraTab">
+        <div class="scanner-container">
+            <!-- Camera View -->
+            <div class="camera-view" id="cameraView">
+                <video id="videoFeed" autoplay playsinline></video>
+                <div class="camera-overlay">
+                    <div class="scan-frame">
+                        <div class="corner tl"></div>
+                        <div class="corner tr"></div>
+                        <div class="corner bl"></div>
+                        <div class="corner br"></div>
+                        <div class="scan-line" id="scanLine"></div>
+                    </div>
+                    <div class="camera-hint">
+                        <i class="bi bi-info-circle me-1"></i>{{ tr('camera_instruction') }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Canvas (hidden) for capture -->
+            <canvas id="captureCanvas" style="display:none;"></canvas>
+
+            <!-- Camera Controls -->
+            <div class="camera-controls mt-3">
+                <button id="startCameraBtn" class="btn btn-army btn-lg w-100 mb-2" onclick="startCamera()">
+                    <i class="bi bi-camera-video me-2"></i>{{ tr('start_camera') }}
+                </button>
+                <button id="captureBtn" class="btn btn-success btn-lg w-100 d-none" onclick="captureImage()">
+                    <i class="bi bi-camera me-2"></i>{{ tr('capture') }}
+                </button>
+                <button id="analyzeBtn" class="btn btn-warning btn-lg w-100 d-none" onclick="analyzeCapture()">
+                    <i class="bi bi-search me-2"></i>{{ tr('analyze') }}
+                </button>
+            </div>
+
+            <!-- Captured Preview -->
+            <div id="capturedPreview" class="mt-3 d-none">
+                <img id="capturedImg" class="img-fluid rounded" style="max-height:250px; width:100%; object-fit:cover;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Tab -->
+    <div id="uploadTab" class="d-none">
+        <div class="upload-container">
+            <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+                <i class="bi bi-cloud-upload fs-1 text-muted"></i>
+                <p class="mt-2">{{ tr('upload_instruction') }}</p>
+                <button class="btn btn-army">
+                    <i class="bi bi-folder2-open me-1"></i>
+                    {% if lang == 'bn' %}ফাইল বেছে নিন{% else %}Choose File{% endif %}
+                </button>
+            </div>
+            <input type="file" id="fileInput" accept="image/*" class="d-none" onchange="handleFileUpload(event)">
+
+            <div id="uploadPreview" class="mt-3 d-none">
+                <img id="uploadedImg" class="img-fluid rounded mb-3" style="max-height:300px; width:100%; object-fit:cover;">
+                <button class="btn btn-warning btn-lg w-100" onclick="analyzeUpload()">
+                    <i class="bi bi-search me-2"></i>{{ tr('analyze') }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="d-none">
+        <div class="loading-card text-center">
+            <div class="scanner-animation mb-3">
+                <i class="bi bi-radar fs-1 text-army spin"></i>
+            </div>
+            <h5>{{ tr('scanning') }}</h5>
+            <p class="text-muted">
+                {% if lang == 'bn' %}AI দিয়ে বিশ্লেষণ করা হচ্ছে...{% else %}Analyzing with AI...{% endif %}
+            </p>
+            <div class="progress mt-2">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                     style="width: 100%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Result Panel -->
+    <div id="resultPanel" class="mt-3 d-none">
+        <div class="result-card">
+            <div class="result-header" id="resultHeader">
+                <div class="d-flex align-items-center">
+                    <div class="result-icon me-3" id="resultIcon"></div>
+                    <div>
+                        <h5 class="mb-0" id="resultTitle">{{ tr('scan_result') }}</h5>
+                        <div id="resultMeta"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="result-body" id="resultBody"></div>
+        </div>
+
+        <div class="d-flex gap-2 mt-3">
+            <button class="btn btn-outline-secondary flex-fill" onclick="resetScanner()">
+                <i class="bi bi-arrow-repeat me-1"></i>
+                {% if lang == 'bn' %}আবার স্ক্যান{% else %}Scan Again{% endif %}
+            </button>
+            <a id="viewDetailBtn" href="#" class="btn btn-army flex-fill d-none">
+                <i class="bi bi-info-circle me-1"></i>
+                {% if lang == 'bn' %}বিস্তারিত{% else %}Details{% endif %}
+            </a>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+const LANG = '{{ lang }}';
+const SCAN_URL = '{{ url_for("api_scan") }}';
+const RESULT_URL = '{{ url_for("scan_result", scan_id=0) }}'.replace('/0', '/');
+
+let stream = null;
+let capturedImageData = null;
+let uploadedImageData = null;
+
+// Tab switching
+function showTab(tab) {
+    document.getElementById('cameraTab').classList.toggle('d-none', tab !== 'camera');
+    document.getElementById('uploadTab').classList.toggle('d-none', tab !== 'upload');
+    document.querySelectorAll('#scannerTabs .nav-link').forEach((el, i) => {
+        el.classList.toggle('active', (i === 0 && tab === 'camera') || (i === 1 && tab === 'upload'));
+    });
+    if (tab !== 'camera' && stream) {
+        stopCamera();
+    }
+}
+
+// Camera functions
+async function startCamera() {
+    try {
+        stream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } }
+        });
+        const video = document.getElementById('videoFeed');
+        video.srcObject = stream;
+        document.getElementById('startCameraBtn').classList.add('d-none');
+        document.getElementById('captureBtn').classList.remove('d-none');
+        document.getElementById('scanLine').classList.add('scanning');
+    } catch (e) {
+        alert(LANG === 'bn' ? 'ক্যামেরা অ্যাক্সেস করা যাচ্ছে না। অনুগ্রহ করে অনুমতি দিন।' : 'Cannot access camera. Please grant permission.');
+    }
+}
+
+function stopCamera() {
+    if (stream) {
+        stream.getTracks().forEach(t => t.stop());
+        stream = null;
+    }
+}
+
+function captureImage() {
+    const video = document.getElementById('videoFeed');
+    const canvas = document.getElementById('captureCanvas');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas.getContext('2d').drawImage(video, 0, 0);
+    capturedImageData = canvas.toDataURL('image/jpeg', 0.85);
+    document.getElementById('capturedImg').src = capturedImageData;
+    document.getElementById('capturedPreview').classList.remove('d-none');
+    document.getElementById('captureBtn').classList.add('d-none');
+    document.getElementById('analyzeBtn').classList.remove('d-none');
+    stopCamera();
+}
+
+function handleFileUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        uploadedImageData = e.target.result;
+        document.getElementById('uploadedImg').src = uploadedImageData;
+        document.getElementById('uploadPreview').classList.remove('d-none');
+    };
+    reader.readAsDataURL(file);
+}
+
+function analyzeCapture() {
+    if (capturedImageData) analyzeImage(capturedImageData);
+}
+
+function analyzeUpload() {
+    if (uploadedImageData) analyzeImage(uploadedImageData);
+}
+
+async function analyzeImage(imageData) {
+    // Show loading
+    document.getElementById('loadingOverlay').classList.remove('d-none');
+    document.getElementById('resultPanel').classList.add('d-none');
+    document.getElementById('analyzeBtn').disabled = true;
+
+    try {
+        const response = await fetch(SCAN_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ image: imageData })
+        });
+        const result = await response.json();
+        showResult(result);
+    } catch (e) {
+        console.error(e);
+        showError(LANG === 'bn' ? 'বিশ্লেষণে ত্রুটি হয়েছে।' : 'Analysis failed.');
+    } finally {
+        document.getElementById('loadingOverlay').classList.add('d-none');
+        document.getElementById('analyzeBtn').disabled = false;
+    }
+}
+
+function showResult(result) {
+    const panel = document.getElementById('resultPanel');
+    const header = document.getElementById('resultHeader');
+    const body = document.getElementById('resultBody');
+    const icon = document.getElementById('resultIcon');
+    const title = document.getElementById('resultTitle');
+    const meta = document.getElementById('resultMeta');
+
+    panel.classList.remove('d-none');
+
+    // Set threat level styling
+    const threat = result.threat_level || 'unknown';
+    const threatColors = { high: 'danger', medium: 'warning', low: 'success', none: 'secondary' };
+    const color = threatColors[threat] || 'secondary';
+
+    header.className = `result-header bg-${color} bg-opacity-10 border-${color}`;
+
+    // Icon
+    if (result.identified) {
+        icon.innerHTML = `<i class="bi bi-exclamation-octagon-fill text-${color} fs-2"></i>`;
+    } else {
+        icon.innerHTML = `<i class="bi bi-check-circle-fill text-success fs-2"></i>`;
+    }
+
+    // Title
+    if (result.identified) {
+        title.textContent = result.item_name || (LANG === 'bn' ? 'সনাক্তকৃত' : 'Identified');
+    } else {
+        title.textContent = LANG === 'bn' ? 'কোনো বিস্ফোরক সনাক্ত হয়নি' : 'No Explosive Detected';
+    }
+
+    // Meta
+    const threatLabels = {
+        high: LANG === 'bn' ? 'উচ্চ বিপদ' : 'HIGH THREAT',
+        medium: LANG === 'bn' ? 'মাঝারি বিপদ' : 'MEDIUM THREAT',
+        low: LANG === 'bn' ? 'নিম্ন বিপদ' : 'LOW THREAT',
+        none: LANG === 'bn' ? 'কোনো বিপদ নেই' : 'NO THREAT'
+    };
+    meta.innerHTML = `<span class="badge bg-${color}">${threatLabels[threat] || threat}</span>
+        ${result.confidence ? `<span class="badge bg-secondary ms-1">${LANG === 'bn' ? 'নির্ভরযোগ্যতা' : 'Confidence'}: ${result.confidence}</span>` : ''}
+        ${result.api_mode === 'demo' ? `<span class="badge bg-info ms-1">Demo</span>` : ''}`;
+
+    // Body
+    let bodyHtml = '';
+
+    if (result.description) {
+        bodyHtml += `<div class="result-section">
+            <h6><i class="bi bi-info-circle me-1"></i>${LANG === 'bn' ? 'বিবরণ' : 'Description'}</h6>
+            <p>${result.description.replace(/\n/g, '<br>')}</p>
+        </div>`;
+    }
+
+    if (result.immediate_actions && result.immediate_actions.length > 0) {
+        bodyHtml += `<div class="result-section border-danger">
+            <h6 class="text-danger"><i class="bi bi-exclamation-triangle me-1"></i>${LANG === 'bn' ? 'তাৎক্ষণিক পদক্ষেপ' : 'Immediate Actions'}</h6>
+            <ol>`;
+        result.immediate_actions.forEach(a => { bodyHtml += `<li>${a}</li>`; });
+        bodyHtml += '</ol></div>';
+    }
+
+    if (result.disposal_steps && result.disposal_steps.length > 0) {
+        bodyHtml += `<div class="result-section">
+            <h6><i class="bi bi-tools me-1"></i>${LANG === 'bn' ? 'নিষ্ক্রিয়করণ পদক্ষেপ' : 'Disposal Steps'}</h6>
+            <ol>`;
+        result.disposal_steps.forEach(s => { bodyHtml += `<li>${s}</li>`; });
+        bodyHtml += '</ol></div>';
+    }
+
+    if (result.safety_precautions && result.safety_precautions.length > 0) {
+        bodyHtml += `<div class="result-section">
+            <h6><i class="bi bi-shield-check me-1"></i>${LANG === 'bn' ? 'নিরাপত্তা সতর্কতা' : 'Safety Precautions'}</h6>
+            <ul>`;
+        result.safety_precautions.forEach(p => { bodyHtml += `<li>${p}</li>`; });
+        bodyHtml += '</ul></div>';
+    }
+
+    if (result.technical_details) {
+        bodyHtml += `<div class="result-section">
+            <h6><i class="bi bi-cpu me-1"></i>${LANG === 'bn' ? 'প্রযুক্তিগত বিবরণ' : 'Technical Details'}</h6>
+            <p>${result.technical_details}</p>
+        </div>`;
+    }
+
+    body.innerHTML = bodyHtml;
+
+    // View detail button
+    if (result.scan_id) {
+        const detailBtn = document.getElementById('viewDetailBtn');
+        detailBtn.href = RESULT_URL + result.scan_id;
+        detailBtn.classList.remove('d-none');
+    }
+
+    // If DB match found
+    if (result.db_match) {
+        const kbLink = `<a href="/knowledge/${result.db_match.id}" class="btn btn-outline-army btn-sm w-100 mt-2">
+            <i class="bi bi-book me-1"></i>${LANG === 'bn' ? 'তথ্যভান্ডারে দেখুন' : 'View in Knowledge Base'}: ${result.db_match.name}
+        </a>`;
+        body.innerHTML += kbLink;
+    }
+}
+
+function showError(msg) {
+    const panel = document.getElementById('resultPanel');
+    panel.classList.remove('d-none');
+    document.getElementById('resultBody').innerHTML = `<div class="alert alert-danger">${msg}</div>`;
+}
+
+function resetScanner() {
+    capturedImageData = null;
+    uploadedImageData = null;
+    document.getElementById('capturedPreview').classList.add('d-none');
+    document.getElementById('resultPanel').classList.add('d-none');
+    document.getElementById('uploadPreview').classList.add('d-none');
+    document.getElementById('startCameraBtn').classList.remove('d-none');
+    document.getElementById('captureBtn').classList.add('d-none');
+    document.getElementById('analyzeBtn').classList.add('d-none');
+    document.getElementById('viewDetailBtn').classList.add('d-none');
+}
+
+// Drag & drop for upload
+const uploadArea = document.getElementById('uploadArea');
+uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('drag-over'); });
+uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('drag-over'));
+uploadArea.addEventListener('drop', e => {
+    e.preventDefault();
+    uploadArea.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith('image/')) {
+        const input = document.getElementById('fileInput');
+        const dt = new DataTransfer();
+        dt.items.add(file);
+        input.files = dt.files;
+        handleFileUpload({ target: input });
+    }
+});
+</script>
+{% endblock %}

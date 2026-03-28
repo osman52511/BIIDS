@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}{{ tr('scan_result') }} — {{ tr('app_title') }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-3 pb-5">
+
+    <div class="page-header mb-3">
+        <a href="{{ url_for('scan_history') }}" class="btn btn-sm btn-outline-secondary me-2">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+        <h5 class="d-inline mb-0">{{ tr('scan_result') }}</h5>
+    </div>
+
+    <div class="scan-meta mb-3">
+        <small class="text-muted">
+            <i class="bi bi-calendar me-1"></i>{{ scan.scanned_at.strftime('%d %b %Y, %H:%M') }}
+        </small>
+    </div>
+
+    {% if result %}
+    <!-- Threat Level -->
+    <div class="threat-banner threat-bg-{{ result.threat_level or 'unknown' }} mb-3">
+        <h5 class="mb-1">{{ result.item_name or (tr('no_results')) }}</h5>
+        <div>
+            <span class="badge bg-{{ 'danger' if result.threat_level == 'high' else ('warning text-dark' if result.threat_level == 'medium' else 'success') }}">
+                {{ tr('threat_level') }}: {{ result.threat_level | upper if result.threat_level else 'N/A' }}
+            </span>
+            {% if result.confidence %}
+            <span class="badge bg-secondary ms-1">{{ tr('confidence') }}: {{ result.confidence }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Description -->
+    {% if result.description %}
+    <div class="detail-card mb-3">
+        <h6 class="detail-section-title"><i class="bi bi-info-circle me-2"></i>
+            {% if lang == 'bn' %}বিবরণ{% else %}Description{% endif %}</h6>
+        <p>{{ result.description }}</p>
+    </div>
+    {% endif %}
+
+    <!-- Immediate Actions -->
+    {% if result.immediate_actions %}
+    <div class="detail-card border-danger mb-3">
+        <h6 class="detail-section-title text-danger"><i class="bi bi-exclamation-triangle-fill me-2"></i>{{ tr('immediate_actions') }}</h6>
+        <ol>{% for a in result.immediate_actions %}<li>{{ a }}</li>{% endfor %}</ol>
+    </div>
+    {% endif %}
+
+    <!-- Disposal Steps -->
+    {% if result.disposal_steps %}
+    <div class="detail-card mb-3">
+        <h6 class="detail-section-title"><i class="bi bi-tools me-2"></i>{{ tr('disposal_steps') }}</h6>
+        <ol>{% for s in result.disposal_steps %}<li>{{ s }}</li>{% endfor %}</ol>
+    </div>
+    {% endif %}
+
+    <!-- Safety Precautions -->
+    {% if result.safety_precautions %}
+    <div class="detail-card mb-3">
+        <h6 class="detail-section-title"><i class="bi bi-shield-check me-2"></i>{{ tr('safety_precautions') }}</h6>
+        <ul>{% for p in result.safety_precautions %}<li>{{ p }}</li>{% endfor %}</ul>
+    </div>
+    {% endif %}
+
+    <!-- Technical Details -->
+    {% if result.technical_details %}
+    <div class="detail-card mb-3">
+        <h6 class="detail-section-title"><i class="bi bi-cpu me-2"></i>{{ tr('technical_details') }}</h6>
+        <p>{{ result.technical_details }}</p>
+    </div>
+    {% endif %}
+    {% endif %}
+
+    <div class="d-flex gap-2 mt-3">
+        <a href="{{ url_for('scanner') }}" class="btn btn-army flex-fill">
+            <i class="bi bi-camera me-1"></i>{{ tr('back_to_scanner') }}
+        </a>
+    </div>
+</div>
+{% endblock %}

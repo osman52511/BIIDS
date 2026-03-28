@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+{% block title %}{{ explosive.name }} — {{ tr('app_title') }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-3 pb-5">
+
+    <!-- Page Header -->
+    <div class="page-header mb-3">
+        <a href="{{ url_for('knowledge_base') }}" class="btn btn-sm btn-outline-secondary me-2">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+        <h5 class="d-inline mb-0">{{ explosive.name }}</h5>
+    </div>
+
+    <!-- Threat Level Banner -->
+    <div class="threat-banner threat-bg-{{ explosive.threat_level }} mb-3">
+        <div class="d-flex align-items-center justify-content-between">
+            <div>
+                <span class="threat-label">{{ tr('threat_level') }}</span>
+                <span class="threat-value">
+                    {% if explosive.threat_level == 'high' %}
+                    <i class="bi bi-exclamation-octagon-fill me-1"></i>
+                    {{ tr('threat_high') }}
+                    {% elif explosive.threat_level == 'medium' %}
+                    <i class="bi bi-exclamation-triangle-fill me-1"></i>
+                    {{ tr('threat_medium') }}
+                    {% else %}
+                    <i class="bi bi-info-circle-fill me-1"></i>
+                    {{ tr('threat_low') }}
+                    {% endif %}
+                </span>
+            </div>
+            <div class="d-flex flex-column align-items-end">
+                <span class="badge bg-dark mb-1">{{ explosive.category | upper }}</span>
+                {% if explosive.origin == 'bangladesh' %}
+                <span class="badge bg-success">Bangladesh Priority</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Description -->
+    <div class="detail-card mb-3">
+        <h6 class="detail-section-title">
+            <i class="bi bi-info-circle me-2"></i>{{ tr('definition') }}
+        </h6>
+        <p>{{ explosive.description }}</p>
+
+        {% if lang == 'bn' and explosive.english_name %}
+        <div class="bilingual-name">
+            <span class="lang-tag">EN</span> {{ explosive.english_name }}
+        </div>
+        {% elif lang == 'en' and explosive.bengali_name %}
+        <div class="bilingual-name">
+            <span class="lang-tag">বাং</span> {{ explosive.bengali_name }}
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Types -->
+    {% if explosive.types %}
+    <div class="detail-card mb-3">
+        <h6 class="detail-section-title">
+            <i class="bi bi-diagram-3 me-2"></i>{{ tr('types') }}
+        </h6>
+        <ul class="types-list">
+            {% for type in explosive.types %}
+            <li><i class="bi bi-chevron-right text-army me-1"></i>{{ type }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- Examples -->
+    {% if explosive.examples %}
+    <div class="detail-card mb-3">
+        <h6 class="detail-section-title">
+            <i class="bi bi-list-check me-2"></i>{{ tr('examples') }}
+        </h6>
+        <div class="d-flex flex-wrap gap-2">
+            {% for ex in explosive.examples %}
+            <span class="badge bg-secondary">{{ ex }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Components -->
+    {% if explosive.components %}
+    <div class="detail-card mb-3">
+        <h6 class="detail-section-title">
+            <i class="bi bi-puzzle me-2"></i>{{ tr('components') }}
+        </h6>
+        <ul class="component-list">
+            {% for comp in explosive.components %}
+            <li>{{ comp }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- Physical Properties -->
+    {% if explosive.physical_properties %}
+    <div class="detail-card mb-3">
+        <h6 class="detail-section-title">
+            <i class="bi bi-clipboard-data me-2"></i>
+            {% if lang == 'bn' %}ভৌত বৈশিষ্ট্য{% else %}Physical Properties{% endif %}
+        </h6>
+        <div class="properties-grid">
+            {% for key, val in explosive.physical_properties.items() %}
+            <div class="property-row">
+                <span class="property-key">{{ key }}</span>
+                <span class="property-val">{{ val }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Indicators -->
+    {% if explosive.indicators %}
+    <div class="detail-card mb-3">
+        <h6 class="detail-section-title text-warning">
+            <i class="bi bi-eye me-2"></i>
+            {% if lang == 'bn' %}সনাক্তকরণ চিহ্ন{% else %}Identification Indicators{% endif %}
+        </h6>
+        <ul class="indicator-list">
+            {% for ind in explosive.indicators %}
+            <li><i class="bi bi-search text-warning me-2"></i>{{ ind }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- Immediate Actions - HIGH PRIORITY -->
+    {% if explosive.immediate_actions %}
+    <div class="detail-card border-danger mb-3">
+        <h6 class="detail-section-title text-danger">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ tr('immediate_actions') }}
+        </h6>
+        <ol class="action-list">
+            {% for action in explosive.immediate_actions %}
+            <li class="action-item">{{ action }}</li>
+            {% endfor %}
+        </ol>
+    </div>
+    {% endif %}
+
+    <!-- Disposal Steps -->
+    {% if explosive.disposal_steps %}
+    <div class="detail-card mb-3">
+        <h6 class="detail-section-title">
+            <i class="bi bi-tools me-2"></i>{{ tr('disposal_steps') }}
+        </h6>
+        <ol class="disposal-list">
+            {% for step in explosive.disposal_steps %}
+            <li class="disposal-item">{{ step }}</li>
+            {% endfor %}
+        </ol>
+    </div>
+    {% endif %}
+
+    <!-- Safety Precautions -->
+    {% if explosive.safety_precautions %}
+    <div class="detail-card mb-3">
+        <h6 class="detail-section-title">
+            <i class="bi bi-shield-check me-2"></i>{{ tr('safety_precautions') }}
+        </h6>
+        <ul class="safety-list">
+            {% for prec in explosive.safety_precautions %}
+            <li>
+                <i class="bi bi-check-circle-fill text-success me-2"></i>{{ prec }}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- Actions -->
+    <div class="d-flex gap-2 mt-4">
+        <a href="{{ url_for('scanner') }}" class="btn btn-army flex-fill">
+            <i class="bi bi-camera me-1"></i>
+            {% if lang == 'bn' %}স্ক্যান করুন{% else %}Scan Now{% endif %}
+        </a>
+        <a href="{{ url_for('knowledge_base') }}" class="btn btn-outline-army flex-fill">
+            <i class="bi bi-arrow-left me-1"></i>
+            {% if lang == 'bn' %}পিছনে{% else %}Back{% endif %}
+        </a>
+    </div>
+
+</div>
+{% endblock %}

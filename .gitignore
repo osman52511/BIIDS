@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*.pyo
+*.db
+*.sqlite3
+.env
+*.env
+setup_api_key.bat
+static/uploads/*
+!static/uploads/.gitkeep
+bidc_content.txt
+ied_cbrn_content.txt
+*.pdf
+*.log
+.DS_Store

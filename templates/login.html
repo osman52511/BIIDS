@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}{{ tr('login') }} — {{ tr('app_title') }}{% endblock %}
+
+{% block content %}
+<div class="auth-page d-flex align-items-center justify-content-center min-vh-100">
+    <div class="auth-card">
+        <!-- Logo/Header -->
+        <div class="auth-header text-center mb-4">
+            <div class="auth-logo">
+                <i class="bi bi-shield-fill-exclamation"></i>
+            </div>
+            <h4 class="auth-title">{{ tr('app_title') }}</h4>
+            <p class="auth-subtitle">{{ tr('app_subtitle') }}</p>
+            <div class="classified-badge">{{ tr('classified') }}</div>
+        </div>
+
+        <!-- Login Form -->
+        <form method="POST" action="{{ url_for('login') }}" class="auth-form">
+            <div class="mb-3">
+                <label class="form-label">
+                    <i class="bi bi-person-badge me-1"></i>{{ tr('personal_number') }}
+                </label>
+                <input type="text" name="personal_number" class="form-control form-control-lg"
+                       placeholder="{{ tr('personal_number_placeholder') }}"
+                       required autocomplete="username" autocapitalize="characters">
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">
+                    <i class="bi bi-lock me-1"></i>{{ tr('password') }}
+                </label>
+                <div class="input-group">
+                    <input type="password" name="password" id="loginPassword"
+                           class="form-control form-control-lg"
+                           placeholder="••••••••" required autocomplete="current-password">
+                    <button class="btn btn-outline-secondary" type="button"
+                            onclick="togglePassword('loginPassword')">
+                        <i class="bi bi-eye" id="loginPasswordIcon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-army btn-lg w-100 mb-3">
+                <i class="bi bi-box-arrow-in-right me-2"></i>{{ tr('login_btn') }}
+            </button>
+        </form>
+
+        <div class="text-center">
+            <span class="text-muted">{{ tr('no_account') }}</span>
+            <a href="{{ url_for('register') }}" class="auth-link">{{ tr('register_link') }}</a>
+        </div>
+
+        <!-- Language Switch -->
+        <div class="lang-switch-auth text-center mt-3">
+            <a href="{{ url_for('set_language', lang='bn') }}"
+               class="btn btn-sm {{ 'btn-army' if lang == 'bn' else 'btn-outline-secondary' }}">বাংলা</a>
+            <a href="{{ url_for('set_language', lang='en') }}"
+               class="btn btn-sm {{ 'btn-army' if lang == 'en' else 'btn-outline-secondary' }}">English</a>
+        </div>
+
+        <!-- Demo Credentials -->
+        <div class="demo-hint text-center mt-3">
+            <small class="text-muted">Demo: DEMO001 / demo123</small>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function togglePassword(fieldId) {
+    const field = document.getElementById(fieldId);
+    const icon = document.getElementById(fieldId + 'Icon');
+    if (field.type === 'password') {
+        field.type = 'text';
+        icon.classList.replace('bi-eye', 'bi-eye-slash');
+    } else {
+        field.type = 'password';
+        icon.classList.replace('bi-eye-slash', 'bi-eye');
+    }
+}
+</script>
+{% endblock %}
