@@ -35,7 +35,8 @@
                 'mines': tr('mines'),
                 'aerial': tr('aerial'),
                 'naval': tr('naval'),
-                'cbrn': 'CBRN'
+                'cbrn': 'CBRN',
+                'eod_equipment': 'EOD সরঞ্জাম' if lang == 'bn' else 'EOD Equipment'
             } %}
             {% for cat in categories %}
             <a href="{{ url_for('knowledge_base', category=cat, q=query) }}"
@@ -46,6 +47,7 @@
                 {% elif cat == 'aerial' %}<i class="bi bi-airplane me-1"></i>
                 {% elif cat == 'naval' %}<i class="bi bi-water me-1"></i>
                 {% elif cat == 'conventional' %}<i class="bi bi-boxes me-1"></i>
+                {% elif cat == 'eod_equipment' %}<i class="bi bi-shield-check me-1"></i>
                 {% endif %}
                 {{ cat_labels[cat] }}
             </a>
@@ -74,9 +76,18 @@
         <div class="col-12 col-md-6 col-lg-4">
             <a href="{{ url_for('explosive_detail', explosive_id=exp.id) }}"
                class="explosive-card text-decoration-none">
+                {% if exp.image_url %}
+                <div class="explosive-card-img">
+                    <img src="{{ exp.image_url }}" alt="{{ exp.name }}"
+                         onerror="this.parentElement.style.display='none'">
+                    <div class="threat-badge-overlay threat-{{ exp.threat_level }}">
+                        {{ exp.threat_level | upper }}
+                    </div>
+                </div>
+                {% endif %}
                 <div class="explosive-card-header">
                     <div class="d-flex align-items-start justify-content-between">
-                        <div>
+                        <div class="flex-grow-1">
                             {% if exp.origin == 'bangladesh' %}
                             <span class="badge bg-success mb-1">
                                 <i class="bi bi-flag me-1"></i>Bangladesh
@@ -89,13 +100,15 @@
                             <small class="text-muted">{{ exp.bengali_name }}</small>
                             {% endif %}
                         </div>
+                        {% if not exp.image_url %}
                         <div class="threat-badge threat-{{ exp.threat_level }}">
                             {{ exp.threat_level | upper }}
                         </div>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="explosive-card-body">
-                    <p class="explosive-desc">{{ exp.description[:120] }}...</p>
+                    <p class="explosive-desc">{{ exp.description[:100] }}...</p>
                     <div class="d-flex align-items-center justify-content-between">
                         <span class="category-chip category-{{ exp.category }}">
                             {{ exp.category | upper }}

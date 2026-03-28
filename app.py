@@ -501,7 +501,7 @@ def knowledge_base():
     # Sort by priority (Bangladesh first)
     explosives.sort(key=lambda x: (x.get('origin') != 'bangladesh', x.get('priority', 99)))
 
-    categories = ['all', 'ied', 'conventional', 'mines', 'aerial', 'naval', 'cbrn']
+    categories = ['all', 'ied', 'conventional', 'mines', 'aerial', 'naval', 'cbrn', 'eod_equipment']
     return render_template('knowledge_base.html', lang=lang, tr=tr, user=user,
                            explosives=explosives, category=category, query=query,
                            categories=categories, TRANSLATIONS=TRANSLATIONS)

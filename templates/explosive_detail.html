@@ -12,6 +12,15 @@
         <h5 class="d-inline mb-0">{{ explosive.name }}</h5>
     </div>
 
+    <!-- Main Image -->
+    {% if explosive.image_url %}
+    <div class="detail-main-image mb-3">
+        <img src="{{ explosive.image_url }}" alt="{{ explosive.name }}"
+             class="img-fluid rounded"
+             onerror="this.parentElement.style.display='none'">
+    </div>
+    {% endif %}
+
     <!-- Threat Level Banner -->
     <div class="threat-banner threat-bg-{{ explosive.threat_level }} mb-3">
         <div class="d-flex align-items-center justify-content-between">
@@ -56,6 +65,27 @@
         </div>
         {% endif %}
     </div>
+
+    <!-- Parts Gallery -->
+    {% if explosive.gallery %}
+    <div class="detail-card mb-3">
+        <h6 class="detail-section-title">
+            <i class="bi bi-images me-2"></i>
+            {% if lang == 'bn' %}বিভিন্ন অংশ ও ধরন{% else %}Parts & Variants{% endif %}
+        </h6>
+        <div class="parts-gallery">
+            {% for part in explosive.gallery %}
+            <div class="part-item">
+                <img src="{{ part.url }}" alt="{{ part.label_bn if lang == 'bn' else part.label_en }}"
+                     onerror="this.src='';this.parentElement.classList.add('img-error')">
+                <div class="part-label">
+                    {{ part.label_bn if lang == 'bn' else part.label_en }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
 
     <!-- Types -->
     {% if explosive.types %}

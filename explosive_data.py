@@ -445,6 +445,86 @@ EXPLOSIVES_DATABASE = {
             'safety_precautions': ['কখনো একা মোকাবেলা করবেন না', 'ব্যক্তি থেকে দূরত্ব বজায় রাখুন'],
             'image_keywords': ['suicide bomber', 'vest bomb', 'pbied', 'body worn', 'explosive vest'],
         },
+
+        # ===== EOD সরঞ্জাম (EOD EQUIPMENT) =====
+        {
+            'id': 'eod_001',
+            'name': 'ইওডি সুরক্ষা পোশাক (বোম্ব স্যুট)',
+            'english_name': 'EOD Protective Suit (Bomb Suit)',
+            'category': 'eod_equipment',
+            'origin': 'international',
+            'priority': 1,
+            'threat_level': 'safe',
+            'description': 'বিস্ফোরক নিষ্ক্রিয়করণে ব্যবহৃত বিশেষ সুরক্ষা পোশাক। ব্লাস্ট প্রেশার, ফ্র্যাগমেন্টেশন ও তাপ থেকে সুরক্ষা দেয়। ওজন প্রায় ৩৫-৮০ কেজি।',
+            'components': ['ব্লাস্ট-প্রতিরোধী জ্যাকেট', 'সুরক্ষা হেলমেট ও ভাইজার', 'গ্লাভস', 'ট্রাউজার্স', 'বুট', 'কুলিং ভেস্ট'],
+            'types': ['হেভি EOD স্যুট (Mk5/Mk6)', 'লাইটওয়েট সার্চ স্যুট', 'CBRN স্যুট'],
+            'image_keywords': ['eod suit', 'bomb suit', 'protective suit', 'disposal suit'],
+        },
+        {
+            'id': 'eod_002',
+            'name': 'ইওডি রোবট',
+            'english_name': 'EOD Robot / Remote Controlled Vehicle',
+            'category': 'eod_equipment',
+            'origin': 'international',
+            'priority': 1,
+            'threat_level': 'safe',
+            'description': 'দূর থেকে নিয়ন্ত্রিত রোবট যা IED পরীক্ষা ও নিষ্ক্রিয়করণে ব্যবহৃত হয়। অপারেটরকে সরাসরি বিপদ থেকে রক্ষা করে। ক্যামেরা, রোবোটিক আর্ম এবং ডিসরাপ্টার মাউন্ট থাকে।',
+            'components': ['রোবোটিক আর্ম (মাল্টি-জয়েন্ট)', 'HD ক্যামেরা সিস্টেম (ফ্রন্ট/রিয়ার)', 'রিমোট কন্ট্রোল কনসোল', 'ডিসরাপ্টার মাউন্ট', 'ট্র্যাক/হুইল ড্রাইভ', 'লাইটিং সিস্টেম'],
+            'types': ['iRobot PackBot 510', 'QinetiQ Talon', 'Dragon Runner', 'Telemax Pro'],
+            'image_keywords': ['eod robot', 'bomb robot', 'remote vehicle', 'disposal robot', 'packbot'],
+        },
+        {
+            'id': 'eod_003',
+            'name': 'ডিসরাপ্টার (PAN Disruptor)',
+            'english_name': 'Disruptor / PAN Disruptor Mk5',
+            'category': 'eod_equipment',
+            'origin': 'international',
+            'priority': 1,
+            'threat_level': 'safe',
+            'description': 'উচ্চ-চাপের পানি বা প্রজেক্টাইল দিয়ে IED-এর সার্কিট বা পাওয়ার সাপ্লাই বিচ্ছিন্ন করে। নিরাপদ ও কার্যকর নিষ্ক্রিয়করণ পদ্ধতি। সাধারণত রোবটে মাউন্ট করা হয়।',
+            'components': ['হাই-প্রেশার ওয়াটার/স্লাগ গান', 'ফায়ারিং মেকানিজম', 'মাউন্টিং ব্র্যাকেট', 'রিমোট ফায়ারিং কেবল', 'প্রজেক্টাইল চার্জ'],
+            'types': ['PAN Disruptor Mk5', 'Piglet', 'REMO Disruptor', 'Water Disruptor'],
+            'image_keywords': ['disruptor', 'pan disruptor', 'water disruptor', 'eod tool', 'mk5'],
+        },
+        {
+            'id': 'eod_004',
+            'name': 'মেটাল ডিটেক্টর ও সার্চ কিট',
+            'english_name': 'Metal Detector & Mine Search Kit',
+            'category': 'eod_equipment',
+            'origin': 'international',
+            'priority': 1,
+            'threat_level': 'safe',
+            'description': 'মাটিতে বা বস্তুর ভেতরে ধাতব বস্তু শনাক্তকরণে ব্যবহৃত। মাইন ও IED সার্চে অপরিহার্য সরঞ্জাম। বাংলাদেশ সেনাবাহিনীতে ব্যাপকভাবে ব্যবহৃত।',
+            'components': ['মেটাল ডিটেক্টর হেড', 'কন্ট্রোল বক্স', 'প্রড (তদন্ত কাঠি)', 'হেডফোন', 'মার্কিং পেগ ও টেপ'],
+            'types': ['Vallon VMH3CS', 'CEIA CMD', 'Minelab F3', 'Ebinger UPEX 740'],
+            'image_keywords': ['metal detector', 'mine detector', 'search kit', 'eod search', 'vallon'],
+        },
+        {
+            'id': 'eod_005',
+            'name': 'হুক ও লাইন কিট',
+            'english_name': 'Hook & Line Kit (Manual Disruptor)',
+            'category': 'eod_equipment',
+            'origin': 'international',
+            'priority': 1,
+            'threat_level': 'safe',
+            'description': 'নিরাপদ দূরত্ব থেকে সন্দেহজনক বস্তু সরানো বা টেনে আনার জন্য ব্যবহৃত হয়। প্রথম পর্যায়ের EOD কার্যক্রমে সবচেয়ে মৌলিক সরঞ্জাম।',
+            'components': ['স্টিল গ্র্যাপনেল হুক', 'নাইলন রোপ (১০০ মিটার+)', 'পুলি সিস্টেম', 'কার্বাইনার ক্লিপ', 'স্টোরেজ ব্যাগ'],
+            'types': ['সিঙ্গেল হুক ও লাইন', 'ট্রিপল হুক', 'গ্র্যাপনেল হুক', 'টেলিস্কোপিক হুক'],
+            'image_keywords': ['hook and line', 'rope kit', 'eod hook', 'drag kit', 'grapnel'],
+        },
+        {
+            'id': 'eod_006',
+            'name': 'পোর্টেবল X-রে স্ক্যানিং সিস্টেম',
+            'english_name': 'Portable X-Ray Scanning System',
+            'category': 'eod_equipment',
+            'origin': 'international',
+            'priority': 1,
+            'threat_level': 'safe',
+            'description': 'পোর্টেবল X-রে সিস্টেম যা IED, পার্সেল বোম্ব বা সন্দেহজনক বস্তুর ভেতরের কাঠামো পরীক্ষায় ব্যবহৃত হয়। বিস্ফোরণ ছাড়াই আভ্যন্তরীণ কাঠামো দেখা সম্ভব।',
+            'components': ['X-রে জেনারেটর হেড', 'ডিজিটাল ডিটেক্টর প্যানেল', 'ল্যাপটপ/ট্যাবলেট ভিউয়ার', 'রিমোট ফায়ারিং কেবল', 'কোলিমেটর'],
+            'types': ['Scanna SC12C', 'Golden Engineering XRIS50', 'Vidisco Fox-RAPISCAN', 'Logos Imaging'],
+            'image_keywords': ['xray', 'x-ray scanner', 'portable xray', 'eod xray', 'scanna'],
+        },
     ],
 
     'en': [
@@ -707,18 +787,278 @@ EXPLOSIVES_DATABASE = {
             'safety_precautions': ['No entry without CBRN gear', 'Protect yourself before touching victims'],
             'image_keywords': ['chemical weapon', 'gas canister', 'cbrn', 'yellow cross', 'nerve agent'],
         },
+
+        # ===== EOD EQUIPMENT =====
+        {
+            'id': 'eod_001',
+            'name': 'EOD Protective Suit (Bomb Suit)',
+            'bengali_name': 'ইওডি সুরক্ষা পোশাক',
+            'category': 'eod_equipment',
+            'origin': 'international',
+            'priority': 1,
+            'threat_level': 'safe',
+            'description': 'Specialized protective suit used in explosive ordnance disposal. Protects against blast pressure, fragmentation, and heat. Weighs approximately 35-80 kg.',
+            'components': ['Blast-resistant jacket', 'Protective helmet & visor', 'Gloves', 'Trousers', 'Boots', 'Cooling vest'],
+            'types': ['Heavy EOD Suit (Mk5/Mk6)', 'Lightweight Search Suit', 'CBRN Suit'],
+            'image_keywords': ['eod suit', 'bomb suit', 'protective suit', 'disposal suit'],
+        },
+        {
+            'id': 'eod_002',
+            'name': 'EOD Robot / Remote Controlled Vehicle',
+            'bengali_name': 'ইওডি রোবট',
+            'category': 'eod_equipment',
+            'origin': 'international',
+            'priority': 1,
+            'threat_level': 'safe',
+            'description': 'Remotely controlled robot used for IED inspection and neutralization. Protects operators from direct danger. Equipped with camera system, robotic arm, and disruptor mount.',
+            'components': ['Multi-joint robotic arm', 'HD camera system (front/rear)', 'Remote control console', 'Disruptor mount', 'Track/wheel drive', 'Lighting system'],
+            'types': ['iRobot PackBot 510', 'QinetiQ Talon', 'Dragon Runner', 'Telemax Pro'],
+            'image_keywords': ['eod robot', 'bomb robot', 'remote vehicle', 'disposal robot', 'packbot'],
+        },
+        {
+            'id': 'eod_003',
+            'name': 'Disruptor / PAN Disruptor Mk5',
+            'bengali_name': 'ডিসরাপ্টার (PAN Disruptor)',
+            'category': 'eod_equipment',
+            'origin': 'international',
+            'priority': 1,
+            'threat_level': 'safe',
+            'description': 'Disrupts IED circuitry or power supply using high-pressure water or projectile. Safe and effective neutralization method. Typically mounted on EOD robot.',
+            'components': ['High-pressure water/slug gun', 'Firing mechanism', 'Mounting bracket', 'Remote firing cable', 'Projectile charge'],
+            'types': ['PAN Disruptor Mk5', 'Piglet', 'REMO Disruptor', 'Water Disruptor'],
+            'image_keywords': ['disruptor', 'pan disruptor', 'water disruptor', 'eod tool', 'mk5'],
+        },
+        {
+            'id': 'eod_004',
+            'name': 'Metal Detector & Mine Search Kit',
+            'bengali_name': 'মেটাল ডিটেক্টর ও সার্চ কিট',
+            'category': 'eod_equipment',
+            'origin': 'international',
+            'priority': 1,
+            'threat_level': 'safe',
+            'description': 'Used to detect metallic objects in ground or within objects. Essential tool for mine and IED search operations. Widely used in Bangladesh Army.',
+            'components': ['Metal detector head', 'Control box', 'Prod (probe rod)', 'Headphones', 'Marking pegs & tape'],
+            'types': ['Vallon VMH3CS', 'CEIA CMD', 'Minelab F3', 'Ebinger UPEX 740'],
+            'image_keywords': ['metal detector', 'mine detector', 'search kit', 'eod search', 'vallon'],
+        },
+        {
+            'id': 'eod_005',
+            'name': 'Hook & Line Kit (Manual Disruptor)',
+            'bengali_name': 'হুক ও লাইন কিট',
+            'category': 'eod_equipment',
+            'origin': 'international',
+            'priority': 1,
+            'threat_level': 'safe',
+            'description': 'Used to move or drag suspicious objects from a safe distance. The most basic EOD tool used in initial response. Keeps operator at safe distance.',
+            'components': ['Steel grapnel hook', 'Nylon rope (100m+)', 'Pulley system', 'Carabiner clips', 'Storage bag'],
+            'types': ['Single Hook & Line', 'Triple Hook', 'Grapnel Hook', 'Telescopic Hook'],
+            'image_keywords': ['hook and line', 'rope kit', 'eod hook', 'drag kit', 'grapnel'],
+        },
+        {
+            'id': 'eod_006',
+            'name': 'Portable X-Ray Scanning System',
+            'bengali_name': 'পোর্টেবল X-রে স্ক্যানিং সিস্টেম',
+            'category': 'eod_equipment',
+            'origin': 'international',
+            'priority': 1,
+            'threat_level': 'safe',
+            'description': 'Portable X-ray system used to examine internal structure of IEDs, parcel bombs, or suspicious objects without detonation.',
+            'components': ['X-ray generator head', 'Digital detector panel', 'Laptop/tablet viewer', 'Remote firing cable', 'Collimator'],
+            'types': ['Scanna SC12C', 'Golden Engineering XRIS50', 'Vidisco Fox-RAPISCAN', 'Logos Imaging'],
+            'image_keywords': ['xray', 'x-ray scanner', 'portable xray', 'eod xray', 'scanna'],
+        },
     ]
 }
 
 
+_W = 'https://commons.wikimedia.org/wiki/Special:FilePath/'
+
+EXPLOSIVE_IMAGES = {
+    'bd_ied_001': {
+        'image_url': _W + 'IED_used_Afghanistan_2010.jpg',
+        'gallery': [
+            {'label_bn': 'মূল চার্জ (TNT)', 'label_en': 'Main Charge (TNT)', 'url': _W + 'TNT_block.jpg'},
+            {'label_bn': 'ইলেকট্রিক ডেটোনেটর', 'label_en': 'Electric Detonator', 'url': _W + 'Electric_detonator.JPG'},
+            {'label_bn': 'ব্যাটারি পাওয়ার সোর্স', 'label_en': 'Battery Power Source', 'url': _W + '9-volt_battery.jpg'},
+        ],
+    },
+    'bd_ied_002': {
+        'image_url': _W + 'VBIED.jpg',
+        'gallery': [
+            {'label_bn': 'ANFO মিক্সচার', 'label_en': 'ANFO Explosive Mixture', 'url': _W + 'ANFO.jpg'},
+            {'label_bn': 'ডেটোনেটিং সিস্টেম', 'label_en': 'Detonating System', 'url': _W + 'Electric_detonator.JPG'},
+            {'label_bn': 'TNT মেইন চার্জ', 'label_en': 'TNT Main Charge', 'url': _W + 'TNT_block.jpg'},
+        ],
+    },
+    'bd_ied_003': {
+        'image_url': _W + 'Suspicious_letter.jpg',
+        'gallery': [
+            {'label_bn': 'প্রেশার সুইচ', 'label_en': 'Pressure/Pull Switch', 'url': _W + 'Mousetrap_IED.jpg'},
+            {'label_bn': 'ডেটোনেটর', 'label_en': 'Detonator', 'url': _W + 'Electric_detonator.JPG'},
+        ],
+    },
+    'he_001': {
+        'image_url': _W + 'TNT_block.jpg',
+        'gallery': [
+            {'label_bn': 'TNT ব্লক', 'label_en': 'TNT Block (Yellow)', 'url': _W + 'TNT_block.jpg'},
+            {'label_bn': 'রাসায়নিক গঠন', 'label_en': 'Chemical Structure', 'url': _W + '2,4,6-Trinitrotoluene.svg'},
+            {'label_bn': 'M112 ডেমোলিশন ব্লক', 'label_en': 'M112 Demolition Block', 'url': _W + 'M112_demolition_block.jpg'},
+        ],
+    },
+    'he_002': {
+        'image_url': _W + 'C4explosivesim.jpg',
+        'gallery': [
+            {'label_bn': 'C4/PE ব্লক', 'label_en': 'C4/PE Block (White)', 'url': _W + 'C4explosivesim.jpg'},
+            {'label_bn': 'RDX রাসায়নিক সূত্র', 'label_en': 'RDX Chemical Structure', 'url': _W + 'RDX-3D-balls.png'},
+            {'label_bn': 'ডেটোনেটর সহ', 'label_en': 'With Electric Detonator', 'url': _W + 'Electric_detonator.JPG'},
+        ],
+    },
+    'he_003': {
+        'image_url': _W + 'RDX.jpg',
+        'gallery': [
+            {'label_bn': 'RDX পাউডার (সাদা)', 'label_en': 'RDX Powder (White)', 'url': _W + 'RDX.jpg'},
+            {'label_bn': 'রাসায়নিক সূত্র', 'label_en': 'Molecular Structure', 'url': _W + 'RDX-2D-skeletal.svg'},
+        ],
+    },
+    'he_004': {
+        'image_url': _W + 'Nitroglycerin_3.svg',
+        'gallery': [
+            {'label_bn': 'অণুর গঠন', 'label_en': 'Molecular Structure', 'url': _W + 'Nitroglycerin_3.svg'},
+            {'label_bn': 'ডিনামাইট', 'label_en': 'Dynamite (NG-based)', 'url': _W + 'Dynamite.jpg'},
+        ],
+    },
+    'he_005': {
+        'image_url': _W + 'ANFO.jpg',
+        'gallery': [
+            {'label_bn': 'ANFO গ্রানিউলস', 'label_en': 'ANFO Granules', 'url': _W + 'ANFO.jpg'},
+            {'label_bn': 'অ্যামোনিয়াম নাইট্রেট', 'label_en': 'Ammonium Nitrate Prills', 'url': _W + 'Ammonium_nitrate_prills.jpg'},
+        ],
+    },
+    'det_001': {
+        'image_url': _W + 'Electric_detonator.JPG',
+        'gallery': [
+            {'label_bn': 'ইলেকট্রিক ডেটোনেটর', 'label_en': 'Electric Detonator', 'url': _W + 'Electric_detonator.JPG'},
+            {'label_bn': 'ব্লাস্টিং ক্যাপ', 'label_en': 'Blasting Cap', 'url': _W + 'Blasting_caps.jpg'},
+            {'label_bn': 'ডেটোনেটিং কর্ড', 'label_en': 'Detonating Cord (DetCord)', 'url': _W + 'Det_cord.jpg'},
+        ],
+    },
+    'mine_001': {
+        'image_url': _W + 'PMN2mine.jpg',
+        'gallery': [
+            {'label_bn': 'PMN-2 ল্যান্ডমাইন', 'label_en': 'PMN-2 Anti-Personnel Mine', 'url': _W + 'PMN2mine.jpg'},
+            {'label_bn': 'M18A1 ক্লেমোর মাইন', 'label_en': 'M18A1 Claymore Mine', 'url': _W + 'M18A1_Claymore_mine.jpg'},
+            {'label_bn': 'মাইন ফিউজ', 'label_en': 'Mine Fuze/Pressure Plate', 'url': _W + 'Fuze_M606.jpg'},
+        ],
+    },
+    'mine_002': {
+        'image_url': _W + 'Horned_Contact_Mine.jpg',
+        'gallery': [
+            {'label_bn': 'হর্নড কন্ট্যাক্ট মাইন', 'label_en': 'Horned Contact Mine', 'url': _W + 'Horned_Contact_Mine.jpg'},
+            {'label_bn': 'লিমপেট মাইন', 'label_en': 'Limpet Mine', 'url': _W + 'Limpet_mine.jpg'},
+        ],
+    },
+    'aerial_001': {
+        'image_url': _W + 'Mk_82_bomb.jpg',
+        'gallery': [
+            {'label_bn': 'Mk-82 GP বোম্ব', 'label_en': 'Mk-82 General Purpose Bomb', 'url': _W + 'Mk_82_bomb.jpg'},
+            {'label_bn': 'নোজ ফিউজ', 'label_en': 'Nose Fuze (M904)', 'url': _W + 'M904_nose_fuze.jpg'},
+            {'label_bn': 'ফিন অ্যাসেম্বলি', 'label_en': 'Fin Assembly', 'url': _W + 'Bomb_fin_assembly.jpg'},
+        ],
+    },
+    'cbrn_001': {
+        'image_url': _W + 'Gas_mask_2_backgrounds.jpg',
+        'gallery': [
+            {'label_bn': 'গ্যাস মাস্ক', 'label_en': 'Gas Mask (CBRN Protection)', 'url': _W + 'Gas_mask_2_backgrounds.jpg'},
+            {'label_bn': 'সারিন অণুর গঠন', 'label_en': 'Sarin Chemical Structure', 'url': _W + 'Sarin-2D-skeletal.svg'},
+            {'label_bn': 'ডিকন্টামিনেশন', 'label_en': 'CBRN Decontamination', 'url': _W + 'CBRN_decontamination.jpg'},
+        ],
+    },
+    'cbrn_002': {
+        'image_url': _W + 'Radiation_warning_symbol.svg',
+        'gallery': [
+            {'label_bn': 'রেডিয়েশন সতর্কতা চিহ্ন', 'label_en': 'Radiation Warning Symbol', 'url': _W + 'Radiation_warning_symbol.svg'},
+            {'label_bn': 'গিগার কাউন্টার', 'label_en': 'Geiger Counter', 'url': _W + 'Geiger_counter.jpg'},
+        ],
+    },
+    'switch_001': {
+        'image_url': _W + 'Improvised_explosive_device.jpg',
+        'gallery': [
+            {'label_bn': 'রিসিভার সার্কিট', 'label_en': 'Radio Receiver Circuit', 'url': _W + 'Radio_receiver_circuit.jpg'},
+            {'label_bn': 'মোবাইল ট্রিগার', 'label_en': 'Mobile Phone Trigger', 'url': _W + 'Mobile_phone.jpg'},
+        ],
+    },
+    'switch_002': {
+        'image_url': _W + 'Suicide_vest.jpg',
+        'gallery': [
+            {'label_bn': 'সুইসাইড ভেস্ট', 'label_en': 'PBIED/Suicide Vest', 'url': _W + 'Suicide_vest.jpg'},
+            {'label_bn': 'ডেড ম্যান সুইচ', 'label_en': 'Dead Man Switch', 'url': _W + 'Dead_man_switch.jpg'},
+        ],
+    },
+    # EOD Equipment
+    'eod_001': {
+        'image_url': _W + 'Bomb_suit.jpg',
+        'gallery': [
+            {'label_bn': 'ফুল বোম্ব স্যুট', 'label_en': 'Full EOD Bomb Suit', 'url': _W + 'Bomb_suit.jpg'},
+            {'label_bn': 'EOD হেলমেট ও ভাইজার', 'label_en': 'EOD Helmet & Visor', 'url': _W + 'EOD_helmet.jpg'},
+            {'label_bn': 'কুলিং ভেস্ট', 'label_en': 'Cooling Vest (inside)', 'url': _W + 'Cooling_vest.jpg'},
+        ],
+    },
+    'eod_002': {
+        'image_url': _W + 'PackBot.jpg',
+        'gallery': [
+            {'label_bn': 'iRobot PackBot 510', 'label_en': 'iRobot PackBot 510', 'url': _W + 'PackBot.jpg'},
+            {'label_bn': 'রোবোটিক আর্ম', 'label_en': 'Robotic Arm Detail', 'url': _W + 'Robot_arm_EOD.jpg'},
+            {'label_bn': 'রিমোট কন্ট্রোল কনসোল', 'label_en': 'Remote Control Console', 'url': _W + 'EOD_robot_controller.jpg'},
+        ],
+    },
+    'eod_003': {
+        'image_url': _W + 'PAN_Disruptor.jpg',
+        'gallery': [
+            {'label_bn': 'PAN Disruptor Mk5', 'label_en': 'PAN Disruptor Mk5', 'url': _W + 'PAN_Disruptor.jpg'},
+            {'label_bn': 'রোবটে মাউন্টেড', 'label_en': 'Mounted on EOD Robot', 'url': _W + 'Disruptor_on_robot.jpg'},
+        ],
+    },
+    'eod_004': {
+        'image_url': _W + 'Metal_detector.jpg',
+        'gallery': [
+            {'label_bn': 'মেটাল ডিটেক্টর', 'label_en': 'Mine/Metal Detector', 'url': _W + 'Metal_detector.jpg'},
+            {'label_bn': 'প্রড দিয়ে তদন্ত', 'label_en': 'Prodding Technique', 'url': _W + 'Mine_probing.jpg'},
+        ],
+    },
+    'eod_005': {
+        'image_url': _W + 'Hook_and_line.jpg',
+        'gallery': [
+            {'label_bn': 'হুক ও লাইন কিট', 'label_en': 'Hook & Line Kit', 'url': _W + 'Hook_and_line.jpg'},
+            {'label_bn': 'গ্র্যাপনেল হুক', 'label_en': 'Grapnel Hook Detail', 'url': _W + 'Grapnel_hook.jpg'},
+        ],
+    },
+    'eod_006': {
+        'image_url': _W + 'Portable_xray_eod.jpg',
+        'gallery': [
+            {'label_bn': 'পোর্টেবল X-রে সিস্টেম', 'label_en': 'Portable X-Ray System', 'url': _W + 'Portable_xray_eod.jpg'},
+            {'label_bn': 'X-রে ইমেজ (IED)', 'label_en': 'X-Ray Image of IED', 'url': _W + 'Xray_IED_image.jpg'},
+        ],
+    },
+}
+
+
 def get_all_explosives(lang='bn'):
-    return EXPLOSIVES_DATABASE.get(lang, EXPLOSIVES_DATABASE['bn'])
+    result = []
+    for exp in EXPLOSIVES_DATABASE.get(lang, EXPLOSIVES_DATABASE['bn']):
+        item = dict(exp)
+        if exp['id'] in EXPLOSIVE_IMAGES:
+            item['image_url'] = EXPLOSIVE_IMAGES[exp['id']].get('image_url')
+        result.append(item)
+    return result
 
 
 def get_explosive_by_id(explosive_id, lang='bn'):
     for exp in EXPLOSIVES_DATABASE.get(lang, EXPLOSIVES_DATABASE['bn']):
         if exp['id'] == explosive_id:
-            return exp
+            result = dict(exp)
+            if explosive_id in EXPLOSIVE_IMAGES:
+                result.update(EXPLOSIVE_IMAGES[explosive_id])
+            return result
     return None
 
 
